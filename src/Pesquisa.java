@@ -1,6 +1,6 @@
 import java.util.Date;
 
-public class Pesquisa extends Candidato{
+public class Pesquisa{
 
 
 }
