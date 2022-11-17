@@ -1,13 +1,16 @@
-import javax.swing.*;
+import javax.swing.SwingUtilities;
 
 public class Main {
     public static void main(String[] args) {
-        Main main = new Main();
-        main.Candidato();
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                mostrarGUI();
+            }
+        });
     }
 
-    public void Candidato(){
-        JFrame frame = new Candidato("Lista de candidatos");
-        frame.setVisible(true);
+    public static void mostrarGUI(){
+        Janela frame = new Janela();
+        frame.mostrar();
     }
 }
