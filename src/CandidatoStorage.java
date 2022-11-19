@@ -21,7 +21,7 @@ public class CandidatoStorage {
             statement.setString(2, candidato.getNomeVice());
             statement.setString(3, candidato.getSiglaPartido());
             statement.setInt(4, candidato.getNumeroPartido());
-//            statement.setInt(4, candidato.getIdCandidato());
+            statement.execute();
 
             resultSet = statement.getGeneratedKeys();
 
@@ -59,7 +59,11 @@ public class CandidatoStorage {
             conexao = BddConection.getConexao();
 
             statement = conexao.prepareStatement(query);
-            statement.setInt(1, candidato.getIdCandidato());
+            statement.setString(1, candidato.getNomeCandidato());
+            statement.setString(2, candidato.getNomeVice());
+            statement.setString(3, candidato.getSiglaPartido());
+            statement.setInt(4, candidato.getNumeroPartido());
+            statement.setInt(5, candidato.getIdCandidato());
             statement.execute();
 
         } catch (SQLException e ) {

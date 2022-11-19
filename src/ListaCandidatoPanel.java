@@ -21,7 +21,6 @@ public class ListaCandidatoPanel extends JPanel {
 
         setLayout(new BorderLayout());
 
-
         criarBtnComandos();
         gerarTabelaPanel();
     }
