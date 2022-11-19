@@ -4,7 +4,7 @@ import java.sql.SQLException;
 
 public class BddConection {
 
-    private static final  String URL = "jdbc:mysql://localhost:3306/PI";
+    private static final  String URL = "jdbc:mysql://localhost:3306/pi";
     private static final String USER = "root";
     private static final String SENHA = "root";
 

@@ -28,12 +28,11 @@ public class Principal extends JPanel {
         JPanel panel = new JPanel();
         panel.setPreferredSize(new Dimension(300, 100));
         panel.setBackground(Color.white);
+        criarBtnListaCandidato();
         criarBtnListaPesquisa();
         panel.add(candidatoBtn);
         panel.add(pesquisaBtn);
         add(panel, BorderLayout.CENTER);
-        criarBtnListaCandidato();
-        criarBtnListaPesquisa();
     }
 
     public void criarBtnListaCandidato(){

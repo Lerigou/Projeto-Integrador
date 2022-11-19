@@ -6,7 +6,8 @@ public class Candidato {
     private int idCandidato;
     private String nomeCandidato;
     private String nomeVice;
-    private int partido;
+    private String siglaPartido;
+    private int numeroPartido;
 
     public int getIdCandidato() {
         return idCandidato;
@@ -32,11 +33,19 @@ public class Candidato {
         this.nomeVice = nomeVice;
     }
 
-    public int getPartido() {
-        return partido;
+    public String getSiglaPartido() {
+        return siglaPartido;
     }
 
-    public void setPartido(int partido) {
-        this.partido = partido;
+    public void setSiglaPartido(String siglaPartido) {
+        this.siglaPartido = siglaPartido;
+    }
+
+    public int getNumeroPartido() {
+        return numeroPartido;
+    }
+
+    public void setNumeroPartido(int numeroPartido) {
+        this.numeroPartido = numeroPartido;
     }
 }
