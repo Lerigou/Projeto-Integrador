@@ -14,8 +14,7 @@ public class CandidatoFormPanel extends JPanel {
     private JTextField txtId;
     private JTextField txtNomeCandidato;
     private JTextField txtNomeVice;
-    private JComboBox numPartido;
-
+    private JTextField numPartido;
     private JButton btnSalvar;
     private JButton btnCancelar;
 
@@ -33,12 +32,12 @@ public class CandidatoFormPanel extends JPanel {
                     txtId.setText("");
                     txtNomeCandidato.setText("");
                     txtNomeVice.setText("");
-                    numPartido.setSelectedItem("");
+                    numPartido.setText("");
                 } else {
                     txtId.setText(Integer.toString(candidato.getIdCandidato()));
                     txtNomeCandidato.setText(candidato.getNomeCandidato());
                     txtNomeVice.setText(candidato.getNomeVice());
-                    numPartido.setSelectedItem(candidato.getPartido());
+                    numPartido.setText(Integer.toString(candidato.getNumeroPartido()));
                 }
             }
         });
@@ -70,10 +69,15 @@ public class CandidatoFormPanel extends JPanel {
         txtNomeVice = new JTextField(30);
         adicionarComponente(txtNomeVice, 1, 3);
 
-        label = new JLabel("Partido");
+        label = new JLabel("Sigla do Partido");
         adicionarComponente(label, 1, 0);
-        numPartido = new JComboBox();
+        numPartido = new JTextField(30);
         adicionarComponente(numPartido, 1, 4);
+
+        label = new JLabel("Número do Partido");
+        adicionarComponente(label, 1, 0);
+        numPartido = new JTextField(30);
+        adicionarComponente(numPartido, 1, 5);
 
         gerarBtns();
 
@@ -100,7 +104,7 @@ public class CandidatoFormPanel extends JPanel {
                     novoCandidato.setNomeCandidato(txtNomeCandidato.getText());
                     novoCandidato.setNomeVice(txtNomeVice.getText());
 //                    novoCandidato.setNumPartido(Integer.parseInt(txtNumPartido.getText()));
-                    numPartido.setSelectedItem(candidato.getPartido());
+                    numPartido.setText(Integer.toString(candidato.getNumeroPartido()));
 
                     CandidatoStorage.inserir(novoCandidato);
                     JOptionPane.showMessageDialog(CandidatoFormPanel.this,
@@ -111,7 +115,7 @@ public class CandidatoFormPanel extends JPanel {
                     candidato.setNomeCandidato(txtNomeCandidato.getText());
                     candidato.setNomeVice(txtNomeVice.getText());
 //                    candidato.setNumPartido(Integer.parseInt(txtNumPartido.getText()));
-                    numPartido.setSelectedItem(candidato.getPartido());
+                    numPartido.setText(Integer.toString(candidato.getNumeroPartido()));
 
                     CandidatoStorage.atualizar(CandidatoFormPanel.this.candidato);
                     JOptionPane.showMessageDialog(CandidatoFormPanel.this,

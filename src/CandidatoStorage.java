@@ -7,7 +7,7 @@ public class CandidatoStorage {
 
     public static boolean inserir(Candidato candidato){
 
-        String query = "INSERT INTO candidato (nomeCandidato, nomeVice, partido, numPartido) VALUES (?, ?, ?, ?)";
+        String query = "INSERT INTO candidato (nomeCandidato, nomeVice, siglapartido, numeroPartido) VALUES (?, ?, ?, ?)";
 
         Connection conexao = null;
         PreparedStatement statement = null;
@@ -19,8 +19,9 @@ public class CandidatoStorage {
             statement = conexao.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             statement.setString(1, candidato.getNomeCandidato());
             statement.setString(2, candidato.getNomeVice());
-            statement.setInt(3, candidato.getPartido());
-            statement.setInt(4, candidato.getIdCandidato());
+            statement.setString(3, candidato.getSiglaPartido());
+            statement.setInt(4, candidato.getNumeroPartido());
+//            statement.setInt(4, candidato.getIdCandidato());
 
             resultSet = statement.getGeneratedKeys();
 
@@ -49,7 +50,7 @@ public class CandidatoStorage {
 
     public static boolean atualizar(Candidato candidato){
 
-        String query = "UPDATE candidato SET nomeCandidato = ?, nomeVice = ?, partido = ? WHERE idCandidato = ?";
+        String query = "UPDATE candidato SET nomeCandidato = ?, nomeVice = ?, siglaPartido = ?, numeroPartido = ? WHERE idCandidato = ?";
 
         Connection conexao = null;
         PreparedStatement statement = null;
@@ -60,9 +61,11 @@ public class CandidatoStorage {
             statement = conexao.prepareStatement(query);
             statement.setInt(1, candidato.getIdCandidato());
             statement.execute();
+
         } catch (SQLException e ) {
             e.printStackTrace();
             return false;
+
         } finally {
             try {
                 if (statement != null) {
@@ -79,7 +82,8 @@ public class CandidatoStorage {
 
     public static boolean remover(Candidato candidato) {
 
-        String query = "DELETE FROM candidato WHERE id = ?";
+        // Será q aqui não fica "WHERE idCandidato = ?"?
+        String query = "DELETE FROM candidato WHERE idCandidato = ?";
 
         Connection conexao = null;
         PreparedStatement statement = null;
@@ -110,7 +114,7 @@ public class CandidatoStorage {
     public static List<Candidato> listar(){
         List<Candidato> candidatos = new ArrayList<>();
 
-        String query = "SEELCT * FROM canddiato ORDER BY idCandiato";
+        String query = "SELECT * FROM candidato ORDER BY idCandidato";
 
         Connection conexao = null;
         Statement statement = null;
@@ -124,10 +128,11 @@ public class CandidatoStorage {
 
             while (resultSet.next()) {
                 Candidato candidato = new Candidato();
-                candidato.setIdCandidato(resultSet.getInt("id"));
-                candidato.setNomeCandidato(resultSet.getString("nome"));
-                candidato.setNomeVice(resultSet.getString("vice"));
-                candidato.setPartido(resultSet.getInt("Partido"));
+                candidato.setIdCandidato(resultSet.getInt("idCandidato"));
+                candidato.setNomeCandidato(resultSet.getString("nomeCandidato"));
+                candidato.setNomeVice(resultSet.getString("nomeVice"));
+                candidato.setSiglaPartido(resultSet.getString("siglaPartido"));
+                candidato.setNumeroPartido(resultSet.getInt("numeroPartido"));
 
                 candidatos.add(candidato);
             }

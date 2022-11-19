@@ -7,7 +7,7 @@ public class CandidatoTableModel extends AbstractTableModel {
     // Cria um array chamado candidatos
     private List<Candidato> candidatos = new ArrayList<>();
     // Configura as colunas das tabelas
-    private String[] colunas = new String[]{"id", "nome", "vice", "partido"};
+    private String[] colunas = new String[]{"id", "Nome candidato", "Nome do Vice", "Sigla do partido", "Número do partido"};
 
     public CandidatoTableModel(List<Candidato> candidatos){
         this.candidatos = candidatos;
@@ -49,7 +49,10 @@ public class CandidatoTableModel extends AbstractTableModel {
                 value = candidato.getNomeVice();
                 break;
             case 3:
-                value = Integer.toString(candidato.getPartido());
+                value = candidato.getSiglaPartido();
+                break;
+            case 4:
+                value = Integer.toString(candidato.getNumeroPartido());
                 break;
             default:
                 System.err.printf("[ERRO] Indice de coluna invalido: %d%n", colId);
