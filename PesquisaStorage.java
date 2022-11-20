@@ -2,13 +2,14 @@ import java.awt.*;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.sql.Date;
 
-public class CandidatoStorage {
+public class PesquisaStorage {
 
 
-    public static boolean inserir(Candidato candidato){
+    public static boolean inserir(Pesquisa pesquisa){
 
-        String query = "INSERT INTO candidato (nomeCandidato, nomeVice, siglapartido, numeroPartido) VALUES (?, ?, ?, ?)";
+        String query = "INSERT INTO pesquisa (uf, data, fonte) VALUES (?, ?, ?)";
 
         Connection conexao = null;
         PreparedStatement statement = null;
@@ -18,16 +19,15 @@ public class CandidatoStorage {
             conexao = BddConection.getConexao();
 
             statement = conexao.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
-            statement.setString(1, candidato.getNomeCandidato());
-            statement.setString(2, candidato.getNomeVice());
-            statement.setString(3, candidato.getSiglaPartido());
-            statement.setInt(4, candidato.getNumeroPartido());
+            statement.setString(1, String.valueOf(pesquisa.getUf()));
+            statement.setDate(2, new java.sql.Date(pesquisa.getData().getTime()));
+            statement.setString(3, pesquisa.getFonte());
             statement.execute();
 
             resultSet = statement.getGeneratedKeys();
 
             if (resultSet.next()) {
-                candidato.setIdCandidato(resultSet.getInt(1));
+                pesquisa.setIdPesquisa(resultSet.getInt(1));
             }
         } catch (SQLException e){
             e.printStackTrace();
@@ -49,9 +49,9 @@ public class CandidatoStorage {
         return true;
     }
 
-    public static boolean atualizar(Candidato candidato){
+    public static boolean atualizar(Pesquisa pesquisa){
 
-        String query = "UPDATE candidato SET nomeCandidato = ?, nomeVice = ?, siglaPartido = ?, numeroPartido = ? WHERE idCandidato = ?";
+        String query = "UPDATE pesquisa SET uf = ?, data = ?, fonte WHERE idPesquisa = ?";
 
         Connection conexao = null;
         PreparedStatement statement = null;
@@ -60,11 +60,9 @@ public class CandidatoStorage {
             conexao = BddConection.getConexao();
 
             statement = conexao.prepareStatement(query);
-            statement.setString(1, candidato.getNomeCandidato());
-            statement.setString(2, candidato.getNomeVice());
-            statement.setString(3, candidato.getSiglaPartido());
-            statement.setInt(4, candidato.getNumeroPartido());
-            statement.setInt(5, candidato.getIdCandidato());
+            statement.setString(1, String.valueOf(pesquisa.getUf()));
+            statement.setDate(2, new java.sql.Date(pesquisa.getData().getTime()));
+            statement.setString(3, pesquisa.getFonte());
             statement.execute();
 
         } catch (SQLException e ) {
@@ -85,9 +83,10 @@ public class CandidatoStorage {
         return true;
     }
 
-    public static boolean remover(Candidato candidato) {
+    public static boolean remover(Pesquisa pesquisa) {
 
-        String query = "DELETE FROM candidato WHERE idCandidato = ?";
+        // Será q aqui não fica "WHERE idCandidato = ?"?
+        String query = "DELETE FROM candidato WHERE idPesquisa = ?";
 
         Connection conexao = null;
         PreparedStatement statement = null;
@@ -96,7 +95,7 @@ public class CandidatoStorage {
             conexao = BddConection.getConexao();
 
             statement = conexao.prepareStatement(query);
-            statement.setInt(1, candidato.getIdCandidato());
+            statement.setInt(1, pesquisa.getIdPesquisa());
             statement.execute();
         } catch (SQLException e ) {
             e.printStackTrace();
@@ -115,10 +114,13 @@ public class CandidatoStorage {
         return true;
     }
 
-    public static List<Candidato> listar(){
-        List<Candidato> candidatos = new ArrayList<>();
+    /**
+     * @return
+     */
+    public static List<Pesquisa> listar(){
+        List<Pesquisa> pesquisas = new ArrayList<>();
 
-        String query = "SELECT * FROM candidato ORDER BY idCandidato";
+        String query = "SELECT * FROM pesquisa ORDER BY data";
 
         Connection conexao = null;
         Statement statement = null;
@@ -131,14 +133,14 @@ public class CandidatoStorage {
             resultSet = statement.executeQuery(query);
 
             while (resultSet.next()) {
-                Candidato candidato = new Candidato();
-                candidato.setIdCandidato(resultSet.getInt("idCandidato"));
-                candidato.setNomeCandidato(resultSet.getString("nomeCandidato"));
-                candidato.setNomeVice(resultSet.getString("nomeVice"));
-                candidato.setSiglaPartido(resultSet.getString("siglaPartido"));
-                candidato.setNumeroPartido(resultSet.getInt("numeroPartido"));
+                Pesquisa pesquisa = new Pesquisa();
+            
+                pesquisa.setIdPesquisa(resultSet.getInt("idPesquisa"));
+                pesquisa.setUf(String.valueOf(resultSet.getString()));
+                pesquisa.setData(resultSet.getDate("data"));
+                pesquisa.setFonte(resultSet.getString("fonte"));
 
-                candidatos.add(candidato);
+                pesquisas.add(pesquisa);
             }
         } catch (SQLException e ) {
             e.printStackTrace();
@@ -156,7 +158,7 @@ public class CandidatoStorage {
             }
         }
 
-        return candidatos;
+        return pesquisas;
     }
 
 }
