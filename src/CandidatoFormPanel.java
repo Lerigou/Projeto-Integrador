@@ -1,4 +1,6 @@
 import javax.swing.*;
+import javax.swing.border.Border;
+import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -24,6 +26,8 @@ public class CandidatoFormPanel extends JPanel {
 
         layout = new GridBagLayout();
         constraints = new GridBagConstraints();
+
+        setBackground(janela.corPrincipal);
 
         setLayout(layout);
         addComponentListener(new ComponentAdapter() {
@@ -56,31 +60,61 @@ public class CandidatoFormPanel extends JPanel {
     private void gerarForm(){
         JLabel label;
 
-        label = new JLabel("id");
+        label = new JLabel("ID");
+        label.setFont(new Font("Arial", Font.BOLD, 15));
+        label.setForeground(janela.corContrasteBlue);
         adicionarComponente(label, 0, 0);
         txtId = new JTextField(5);
         txtId.setEditable(false);
-        adicionarComponente(txtId,0,1);
+        txtId.setBackground(janela.corSecundariaBlueLight);
+        txtId.setFont(new Font("Arial", Font.BOLD, 15));
+        adicionarComponente(txtId,0,2);
 
-        label = new JLabel("Candidato");
+        label = new JLabel("Nome Candidato");
+        label.setFont(new Font("Arial", Font.BOLD, 15));
+        label.setForeground(janela.corContrasteBlue);
         adicionarComponente(label, 1, 0);
         txtNomeCandidato = new JTextField(15);
-        adicionarComponente(txtNomeCandidato, 1, 1);
+        txtNomeCandidato.setBackground(janela.corSecundariaPink);
+        txtNomeCandidato.setForeground(janela.corContrasteBlue);
+        txtNomeCandidato.setFont(new Font("Arial", Font.BOLD, 15));
+        adicionarComponente(txtNomeCandidato, 1, 2);
 
-        label = new JLabel("Vice");
+        label = new JLabel("Nome Vice");
+        label.setFont(new Font("Arial", Font.BOLD, 15));
+        label.setForeground(janela.corContrasteBlue);
         adicionarComponente(label, 2, 0);
         txtNomeVice = new JTextField(15);
-        adicionarComponente(txtNomeVice, 2, 1);
+        txtNomeVice.setBackground(janela.corSecundariaPink);
+        txtNomeVice.setForeground(janela.corContrasteBlue);
+        txtNomeVice.setFont(new Font("Arial", Font.BOLD, 15));
+        adicionarComponente(txtNomeVice, 2, 2);
 
         label = new JLabel("Sigla do Partido");
+        label.setFont(new Font("Arial", Font.BOLD, 15));
+        label.setForeground(janela.corContrasteBlue);
         adicionarComponente(label, 3, 0);
         txtSiglaPartido = new JTextField(15);
-        adicionarComponente(txtSiglaPartido, 3, 1);
+        txtSiglaPartido.setBackground(janela.corSecundariaPink);
+        txtSiglaPartido.setForeground(janela.corContrasteBlue);
+        txtSiglaPartido.setFont(new Font("Arial", Font.BOLD, 15));
+        adicionarComponente(txtSiglaPartido, 3, 2);
 
         label = new JLabel("Número do Partido");
+        label.setFont(new Font("Arial", Font.BOLD, 15));
+        label.setForeground(janela.corContrasteBlue);
         adicionarComponente(label, 4, 0);
         numPartido = new JTextField(15);
-        adicionarComponente(numPartido, 4, 1);
+        numPartido.setBackground(janela.corSecundariaPink);
+        numPartido.setForeground(janela.corContrasteBlue);
+        numPartido.setFont(new Font("Arial", Font.BOLD, 15));
+        adicionarComponente(numPartido, 4, 2);
+
+        Border line = new LineBorder(janela.corPrincipal);
+        txtNomeCandidato.setBorder(line);
+        txtNomeVice.setBorder(line);
+        txtSiglaPartido.setBorder(line);
+        numPartido.setBorder(line);
 
         gerarBtns();
 
@@ -89,16 +123,38 @@ public class CandidatoFormPanel extends JPanel {
     private void gerarBtns() {
         JPanel btnPanel = new JPanel();
         FlowLayout flowLayout = (FlowLayout) btnPanel.getLayout();
-        flowLayout.setAlignment(FlowLayout.LEFT);
+        flowLayout.setAlignment(FlowLayout.CENTER);
+        btnPanel.setBackground(janela.corPrincipal);
 
         gerarBtnSalvar(btnPanel);
         gerarBtnCancelar(btnPanel);
 
-        adicionarComponente(btnPanel, 7, 1, 2, 1);
+        adicionarComponente(btnPanel, 7, 0, 4, 1);
     }
 
     private void gerarBtnSalvar(JPanel btnPanel){
         btnSalvar = new JButton("Salvar");
+
+        btnSalvar.setBackground(janela.corPrincipal);
+        btnSalvar.setForeground(janela.corSecundariaBlue);
+        btnSalvar.setFont(new Font("Arial", Font.BOLD, 15));
+
+        Border line = new LineBorder(janela.corSecundariaBlue);
+        btnSalvar.setBorder(line);
+
+        btnSalvar.setPreferredSize(new Dimension(100, 30));
+
+        btnSalvar.addMouseListener(new java.awt.event.MouseAdapter(){
+            public void mouseEntered(java.awt.event.MouseEvent e){
+                btnSalvar.setForeground(janela.corSecundariaPink);
+                btnSalvar.setBackground(janela.corSecundariaBlue);
+            }
+
+            public void mouseExited(java.awt.event.MouseEvent e){
+                btnSalvar.setForeground(janela.corSecundariaBlue);
+                btnSalvar.setBackground(janela.corPrincipal);
+            }
+        });
         btnSalvar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -141,6 +197,28 @@ public class CandidatoFormPanel extends JPanel {
 
     private void gerarBtnCancelar(JPanel btnPanel) {
         btnCancelar = new JButton("Cancelar");
+
+        btnCancelar.setBackground(janela.corPrincipal);
+        btnCancelar.setForeground(janela.corSecundariaBlue);
+        btnCancelar.setFont(new Font("Arial", Font.BOLD, 15));
+
+        Border line = new LineBorder(janela.corSecundariaBlue);
+        btnCancelar.setBorder(line);
+
+        btnCancelar.setPreferredSize(new Dimension(100, 30));
+
+        btnCancelar.addMouseListener(new java.awt.event.MouseAdapter(){
+            public void mouseEntered(java.awt.event.MouseEvent e){
+                btnCancelar.setForeground(janela.corSecundariaPink);
+                btnCancelar.setBackground(janela.corSecundariaBlue);
+            }
+
+            public void mouseExited(java.awt.event.MouseEvent e){
+                btnCancelar.setForeground(janela.corSecundariaBlue);
+                btnCancelar.setBackground(janela.corPrincipal);
+            }
+        });
+
         btnCancelar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
