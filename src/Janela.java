@@ -12,11 +12,16 @@ public class Janela extends JFrame {
     private ListaCandidatoPanel listaCandidatoPanel;
     private CandidatoFormPanel formCandidatoPanel;
 
+    public Color corPrincipal = new Color(255, 246, 235);
+    public Color corSecundariaPink = new Color(233, 196, 186, 184);
+    public Color  corContrasteBlue = new Color(23,58,103);
+    public Color corSecundariaBlue = new Color(72,102,151);
+    public Color corSecundariaBlueLight = new Color(117, 148, 194, 255);
+
 
 
     public Janela(){
         super(titulo);
-//        setSize(640, 480);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         cardLayout = new CardLayout();
@@ -28,7 +33,7 @@ public class Janela extends JFrame {
 
     public void mostrar() {
         pack();
-        setSize(640, 480);
+        setSize(720, 370);
         setResizable(false);
         setLocationRelativeTo(null);
         setVisible(true);
@@ -57,7 +62,7 @@ public class Janela extends JFrame {
 
     public void mostrarTopCandidatosTable(){
         listaCandidatoPanel = new ListaCandidatoPanel(this);
-        cardPanel.add(listaCandidatoPanel, TopCandidatosTable.class.getName());
+        cardPanel.add(listaCandidatoPanel, ListaCandidatoPanel.class.getName());
     }
 
     private void criarCards(){
