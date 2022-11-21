@@ -12,6 +12,8 @@ public class Janela extends JFrame {
     private ListaCandidatoPanel listaCandidatoPanel;
     private CandidatoFormPanel formCandidatoPanel;
     private TopCandidatosPanel topCandidatosPanel;
+    private PesquisaFormPanel pesquisaFormPanel;
+    private ListaPesquisaPanel listaPesquisaPanel;
 
     public Color corPrincipal = new Color(255, 246, 235);
     public Color corSecundariaPink = new Color(234, 207, 200);
@@ -51,14 +53,18 @@ public class Janela extends JFrame {
     }
 
     public void mostrarPesquisaListPanel(){
-        listaCandidatoPanel.recarregar();
+        listaPesquisaPanel.recarregar();
         cardLayout.show(cardPanel, ListaPesquisaPanel.class.getName());
     }
-
 
     public void mostrarCandidatoForm(Candidato candidato) {
         formCandidatoPanel.setCandidato(candidato);
         cardLayout.show(cardPanel, CandidatoFormPanel.class.getName());
+    }
+
+    public void mostrarPesquisaForm(Pesquisa pesquisa){
+        pesquisaFormPanel.setPesquisa(pesquisa);
+        cardLayout.show(cardPanel, PesquisaFormPanel.class.getName());
     }
 
     public void mostrarTopCandidatosTable(){
@@ -73,8 +79,11 @@ public class Janela extends JFrame {
         listaCandidatoPanel = new ListaCandidatoPanel(this);
         cardPanel.add(listaCandidatoPanel, ListaCandidatoPanel.class.getName());
 
-        formCandidatoPanel = new CandidatoFormPanel(this);
-        cardPanel.add(formCandidatoPanel, CandidatoFormPanel.class.getName());
+        listaPesquisaPanel = new ListaPesquisaPanel(this);
+        cardPanel.add(listaPesquisaPanel, ListaPesquisaPanel.class.getName());
+
+        pesquisaFormPanel = new PesquisaFormPanel(this);
+        cardPanel.add(pesquisaFormPanel, PesquisaFormPanel.class.getName());
 
     }
 
