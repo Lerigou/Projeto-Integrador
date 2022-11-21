@@ -8,7 +8,7 @@ public class PesquisaTableModel extends AbstractTableModel {
     // Cria um array chamado pesquisas
     private List<Pesquisa> pesquisas = new ArrayList<>();
     // Configura as colunas das tabelas
-    private String[] colunas = new String[]{"id", "Unidade de Federação", "Data", "Fonte"};
+    private String[] colunas = new String[]{"id", "porcentagem", "Unidade de Federação", "Data", "Fonte"};
 
     public PesquisaTableModel(List<Pesquisa> pesquisas){
         this.pesquisas = pesquisas;
@@ -44,12 +44,16 @@ public class PesquisaTableModel extends AbstractTableModel {
                 break;
 
             case 1:
+                value = Float.toString(pesquisa.getPorcentagem());
+                break;
+
+            case 2:
                 value = String.valueOf(pesquisa.getUf());
                 break;
-            case 2:
+            case 3:
                 value = String.valueOf(pesquisa.getData());
                 break;
-            case 3:
+            case 4:
                 value = pesquisa.getFonte();
                 break;
             default:

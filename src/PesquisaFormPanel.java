@@ -15,6 +15,7 @@ public class PesquisaFormPanel extends JPanel {
     private JTextField txtUF;
     private JTextField txtData;
     private JTextField txtFonte;
+    private JTextField txtPorcentagem;;
     private JButton btnSalvar;
     private JButton btnCancelar;
 
@@ -66,20 +67,30 @@ public class PesquisaFormPanel extends JPanel {
         txtId.setFont(new Font("Arial", Font.BOLD, 15));
         adicionarComponente(txtId,0,2);
 
-        label = new JLabel("Unidade de Federação");
+        label = new JLabel("Porcentagem");
         label.setFont(new Font("Arial", Font.BOLD, 15));
         label.setForeground(janela.corContrasteBlue);
         adicionarComponente(label, 1, 0);
+        txtPorcentagem = new JTextField(5);
+        txtPorcentagem.setEditable(false);
+        txtPorcentagem.setBackground(janela.corSecundariaBlueLight);
+        txtPorcentagem.setFont(new Font("Arial", Font.BOLD, 15));
+        adicionarComponente(txtPorcentagem,1,2);
+
+        label = new JLabel("Unidade de Federação");
+        label.setFont(new Font("Arial", Font.BOLD, 15));
+        label.setForeground(janela.corContrasteBlue);
+        adicionarComponente(label, 2, 0);
         txtUF = new JTextField(15);
         txtUF.setBackground(janela.corSecundariaPink);
         txtUF.setForeground(janela.corContrasteBlue);
         txtUF.setFont(new Font("Arial", Font.BOLD, 15));
-        adicionarComponente(txtUF, 1, 2);
+        adicionarComponente(txtUF, 2, 2);
 
         label = new JLabel("Data");
         label.setFont(new Font("Arial", Font.BOLD, 15));
         label.setForeground(janela.corContrasteBlue);
-        adicionarComponente(label, 2, 0);
+        adicionarComponente(label, 3, 0);
         txtData = new JTextField(15);
         txtData.setBackground(janela.corSecundariaPink);
         txtData.setForeground(janela.corContrasteBlue);
@@ -100,17 +111,17 @@ public class PesquisaFormPanel extends JPanel {
             }
         });
 
-        adicionarComponente(txtData, 2, 2);
+        adicionarComponente(txtData, 3, 2);
 
         label = new JLabel("Fonte");
         label.setFont(new Font("Arial", Font.BOLD, 15));
         label.setForeground(janela.corContrasteBlue);
-        adicionarComponente(label, 3, 0);
+        adicionarComponente(label, 4, 0);
         txtFonte = new JTextField(15);
         txtFonte.setBackground(janela.corSecundariaPink);
         txtFonte.setForeground(janela.corContrasteBlue);
         txtFonte.setFont(new Font("Arial", Font.BOLD, 15));
-        adicionarComponente(txtFonte, 3, 2);
+        adicionarComponente(txtFonte, 4, 2);
 
         Border line = new LineBorder(janela.corPrincipal);
         txtUF.setBorder(line);
