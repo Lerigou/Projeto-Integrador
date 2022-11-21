@@ -10,7 +10,7 @@ public class Janela extends JFrame {
     private Principal principal;
 
     private ListaCandidatoPanel listaCandidatoPanel;
-    private CandidatoFormPanel formCandidatoPanel;
+    private CandidatoFormPanel candidatoFormPanel;
     private TopCandidatosPanel topCandidatosPanel;
     private PesquisaFormPanel pesquisaFormPanel;
     private ListaPesquisaPanel listaPesquisaPanel;
@@ -58,8 +58,8 @@ public class Janela extends JFrame {
     }
 
     public void mostrarCandidatoForm(Candidato candidato) {
-        formCandidatoPanel.setCandidato(candidato);
-        cardLayout.show(cardPanel, CandidatoFormPanel.class.getName());
+        candidatoFormPanel.setCandidato(candidato);
+        cardLayout.show(cardPanel,  CandidatoFormPanel.class.getName());
     }
 
     public void mostrarPesquisaForm(Pesquisa pesquisa){
@@ -84,6 +84,9 @@ public class Janela extends JFrame {
 
         pesquisaFormPanel = new PesquisaFormPanel(this);
         cardPanel.add(pesquisaFormPanel, PesquisaFormPanel.class.getName());
+
+        candidatoFormPanel = new CandidatoFormPanel(this);
+        cardPanel.add(candidatoFormPanel, CandidatoFormPanel.class.getName());
 
     }
 
