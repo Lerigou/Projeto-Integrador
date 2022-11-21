@@ -24,7 +24,7 @@ public class Principal extends JPanel {
     }
 
     public void criarTopCandidatosTable(){
-
+        janela.mostrarTopCandidatosTable();
     }
 
     public void criarBtns(){

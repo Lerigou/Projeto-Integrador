@@ -5,7 +5,7 @@ import java.util.List;
 public class TopCandidatosTable extends AbstractTableModel {
 
     private List<Candidato> candidatos = new ArrayList<>();
-    private String[] colunas = new String[]{"id", "Nome candidato", "Nome vice", "Nome Partido", "Numero do Partido"};
+    private String[] colunas = new String[]{"Nome candidato", "Nome vice", "Nome Partido", "Porcentagem Total"};
 
     public TopCandidatosTable(List<Candidato> candidatos){
         this.candidatos = candidatos;
