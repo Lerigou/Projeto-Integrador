@@ -177,7 +177,7 @@ public class PesquisaFormPanel extends JPanel {
 //                    transformando string em date
                     novaPesquisa.setData(Date.valueOf(txtData.getText()));
                     novaPesquisa.setFonte(txtFonte.getText());
-
+                    novaPesquisa.setPorcentagem(txtPorcentagem.getText());
                     PesquisaStorage.inserir(novaPesquisa);
                     JOptionPane.showMessageDialog(PesquisaFormPanel.this,
                             "Pesquisa cadastrado com sucesso",
