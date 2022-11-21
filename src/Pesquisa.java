@@ -1,6 +1,6 @@
 import java.util.Date;
 
-public class Pesquisa {
+public class Pesquisa extends CandidatoPesquisa{
 
     private int idPesquisa;
     private char uf;
