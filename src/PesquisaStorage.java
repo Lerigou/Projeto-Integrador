@@ -51,7 +51,7 @@ public class PesquisaStorage {
 
     public static boolean atualizar(Pesquisa pesquisa){
 
-        String query = "UPDATE pesquisa SET uf = ?, data = ?, fonte WHERE idPesquisa = ?";
+        String query = "UPDATE pesquisa SET uf = ?, data = ?, fonte = ? WHERE idPesquisa = ?";
 
         Connection conexao = null;
         PreparedStatement statement = null;
@@ -86,7 +86,7 @@ public class PesquisaStorage {
     public static boolean remover(Pesquisa pesquisa) {
 
         // Será q aqui não fica "WHERE idCandidato = ?"?
-        String query = "DELETE FROM candidato WHERE idPesquisa = ?";
+        String query = "DELETE FROM pesquisa WHERE idPesquisa = ?";
 
         Connection conexao = null;
         PreparedStatement statement = null;

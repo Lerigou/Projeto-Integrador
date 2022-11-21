@@ -2,10 +2,7 @@ import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
+import java.awt.event.*;
 import java.sql.Date;
 
 public class PesquisaFormPanel extends JPanel {
@@ -87,6 +84,22 @@ public class PesquisaFormPanel extends JPanel {
         txtData.setBackground(janela.corSecundariaPink);
         txtData.setForeground(janela.corContrasteBlue);
         txtData.setFont(new Font("Arial", Font.BOLD, 15));
+
+        txtData.addMouseListener(new java.awt.event.MouseAdapter(){
+            public void mouseEntered(java.awt.event.MouseEvent e){
+                if (txtData.getText().equals("")){
+                    txtData.setText("XXXX-XX-XX");
+                    txtData.setForeground(janela.corContrasteBlue);
+                }
+            }
+            public void mouseExited(java.awt.event.MouseEvent e){
+                if (txtData.getText().equals("XXXX-XX-XX")){
+                    txtData.setText("");
+                    txtData.setForeground(janela.corSecundariaBlueLight);
+                }
+            }
+        });
+
         adicionarComponente(txtData, 2, 2);
 
         label = new JLabel("Fonte");
