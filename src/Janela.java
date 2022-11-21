@@ -11,9 +11,10 @@ public class Janela extends JFrame {
 
     private ListaCandidatoPanel listaCandidatoPanel;
     private CandidatoFormPanel formCandidatoPanel;
+    private TopCandidatosPanel topCandidatosPanel;
 
     public Color corPrincipal = new Color(255, 246, 235);
-    public Color corSecundariaPink = new Color(233, 196, 186, 184);
+    public Color corSecundariaPink = new Color(234, 207, 200);
     public Color  corContrasteBlue = new Color(23,58,103);
     public Color corSecundariaBlue = new Color(72,102,151);
     public Color corSecundariaBlueLight = new Color(117, 148, 194, 255);
@@ -61,8 +62,8 @@ public class Janela extends JFrame {
     }
 
     public void mostrarTopCandidatosTable(){
-        listaCandidatoPanel = new ListaCandidatoPanel(this);
-        cardPanel.add(listaCandidatoPanel, ListaCandidatoPanel.class.getName());
+        topCandidatosPanel = new TopCandidatosPanel(this);
+        cardPanel.add(topCandidatosPanel, TopCandidatosTable.class.getName());
     }
 
     private void criarCards(){
