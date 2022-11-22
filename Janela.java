@@ -11,7 +11,6 @@ public class Janela extends JFrame {
 
     private ListaCandidatoPanel listaCandidatoPanel;
     private CandidatoFormPanel candidatoFormPanel;
-    private TopCandidatosPanel topCandidatosPanel;
     private PesquisaFormPanel pesquisaFormPanel;
     private ListaPesquisaPanel listaPesquisaPanel;
 
@@ -65,11 +64,6 @@ public class Janela extends JFrame {
     public void mostrarPesquisaForm(Pesquisa pesquisa){
         pesquisaFormPanel.setPesquisa(pesquisa);
         cardLayout.show(cardPanel, PesquisaFormPanel.class.getName());
-    }
-
-    public void mostrarTopCandidatosTable(){
-        topCandidatosPanel = new TopCandidatosPanel(this);
-        cardPanel.add(topCandidatosPanel, TopCandidatosTable.class.getName());
     }
 
     private void criarCards(){
