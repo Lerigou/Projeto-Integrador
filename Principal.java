@@ -19,12 +19,7 @@ public class Principal extends JPanel {
         this.janela = janela;
         layout = new BorderLayout();
         setLayout(layout);
-        criarTopCandidatosTable();
         criarBtns();
-    }
-
-    public void criarTopCandidatosTable(){
-        janela.mostrarTopCandidatosTable();
     }
 
     public void criarBtns(){
