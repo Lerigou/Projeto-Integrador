@@ -9,12 +9,9 @@ public class PesquisaStorage {
 
     public static boolean inserir(Pesquisa pesquisa){
 
-        String query = "BEGIN;" +
-                "INSERT INTO pesquisa (UF, data,fonte)" +
-                "  VALUES('?', '?',''?);" +
-                "INSERT INTO candidato_pesquisa(candidato_idCandidato,porcentagem)" +
-                "  VALUES('?','?');" +
-                "COMMIT;";
+        String query = "INSERT INTO pesquisa (UF, data, fonte) VALUES('?', '?',''?)";
+//        String query2 = "INSERT INTO candidato_pesquisa(candidato_idCandidato,porcentagem) VALUES('?','?')";
+        String query2 = "INSERT INTO candidato_pesquisa(porcentagem) VALUES('?')";
 
         Connection conexao = null;
         PreparedStatement statement = null;
@@ -24,10 +21,11 @@ public class PesquisaStorage {
             conexao = BddConection.getConexao();
 
             statement = conexao.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
-            statement.setString(1,  Double.toString(pesquisa.getPorcentagem()));
-            statement.setString(2, String.valueOf(pesquisa.getUf()));
-            statement.setDate(3, new java.sql.Date(pesquisa.getData().getTime()));
-            statement.setString(4, pesquisa.getFonte());
+            statement = conexao.prepareStatement(query2, Statement.RETURN_GENERATED_KEYS);
+            statement.setString(1, String.valueOf(pesquisa.getUf()));
+            statement.setDate(2, new java.sql.Date(pesquisa.getData().getTime()));
+            statement.setString(3, pesquisa.getFonte());
+            statement.setString(4,  Float.toString(pesquisa.getPorcentagem()));
             statement.execute();
 
             resultSet = statement.getGeneratedKeys();
@@ -57,9 +55,9 @@ public class PesquisaStorage {
 
     public static boolean atualizar(Pesquisa pesquisa){
 
-        String query = "BEGIN;\n" +
-                "UPDATE pesquisa SET uf = ?, data = ?, fonte = ? WHERE idPesquisa = ?\";\n" +
-                "UPDATE candidato_pesquisa SET candidato_idCandidato = ?, pesquisa_idPesquisaa = ?, porcentagem = ? WHERE idPesquisa = ?;\n" +
+        String query = "BEGIN;" +
+                "UPDATE pesquisa SET uf = ?, data = ?, fonte = ? WHERE idPesquisa = ?;" +
+                "UPDATE candidato_pesquisa SET candidato_idCandidato = ?, pesquisa_idPesquisaa = ?, porcentagem = ? WHERE idPesquisa = ?;" +
                 "COMMIT;";
 
         Connection conexao = null;
@@ -131,7 +129,7 @@ public class PesquisaStorage {
     public static List<Pesquisa> listar(){
         List<Pesquisa> pesquisas = new ArrayList<>();
 
-        String query = "SELECT * FROM pesquisa p JOIN candidato_pesquisa cp ON p.idpesquisa = cp.pesquisa_idpesquisa ORDER BY data;\n";
+        String query = "SELECT * FROM pesquisa p JOIN candidato_pesquisa cp ON p.idpesquisa = cp.pesquisa_idpesquisa ORDER BY data;";
 
         Connection conexao = null;
         Statement statement = null;
