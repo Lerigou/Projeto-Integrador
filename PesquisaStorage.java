@@ -9,10 +9,10 @@ public class PesquisaStorage {
 
     public static boolean inserir(Pesquisa pesquisa){
 
+        String query = "INSERT INTO pesquisa (UF, data, fonte) VALUES(?, ?,?)";
 
-        String query = "INSERT INTO pesquisa (UF, data, fonte) VALUES('?', '?',''?)";
 //        String query2 = "INSERT INTO candidato_pesquisa(candidato_idCandidato,porcentagem) VALUES('?','?')";
-        String query2 = "INSERT INTO candidato_pesquisa(porcentagem) VALUES('?')";
+        //String query2 = "INSERT INTO candidato_pesquisa(candidato_idcandidato,pesquisa_idpesquisa,porcentagem) VALUES(?,?,?)";
 
 
                 // String query = "BEGIN;" +
@@ -37,10 +37,13 @@ public class PesquisaStorage {
 
             statement = conexao.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 
-            statement = conexao.prepareStatement(query2, Statement.RETURN_GENERATED_KEYS);
+            //statement = conexao.prepareStatement(query2, Statement.RETURN_GENERATED_KEYS);
+
             statement.setString(1, String.valueOf(pesquisa.getUf()));
             statement.setDate(2, new java.sql.Date(pesquisa.getData().getTime()));
             statement.setString(3, pesquisa.getFonte());
+            
+            //TA DANDO ERRO NO FLOAT
             statement.setString(4,  Float.toString(pesquisa.getPorcentagem()));
 
 
@@ -168,9 +171,9 @@ public class PesquisaStorage {
     public static List<Pesquisa> listar(){
         List<Pesquisa> pesquisas = new ArrayList<>();
 
+        //String query = "SELECT cp.pesquisa_idpesquisa, c.nomeCandidato, p.uf, p.data, p.fonte FROM pesquisa p JOIN candidato_pesquisa cp ON p.idpesquisa = cp.pesquisa_idpesquisa JOIN candidato c on c.idcandidato = cp.candidato_idcandidato ORDER BY cp.idpesquisa;";
+        String query = "SELECT * FROM pesquisa p JOIN candidato_pesquisa cp ON p.idpesquisa = cp.pesquisa_idpesquisa ORDER BY idpesquisa;";
 
-        //String query = "Select * from pesquisa order by data";
-        String query = "SELECT * FROM pesquisa p JOIN candidato_pesquisa cp ON p.idpesquisa = cp.pesquisa_idpesquisa ORDER BY data;";
 
         //String query = "SELECT * FROM pesquisa ORDER BY data";
         // A utilização desse JOIN ta dando erro
