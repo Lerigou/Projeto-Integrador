@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.sql.Date;
 
-public class PesquisaStorage {
+public class CandidatoPesquisaStorage {
 
 
-    public static boolean inserir(Pesquisa pesquisa){
+    public static boolean inserir(CandidatoPesquisa candidatoPesquisa){
 
-        String query = "INSERT INTO pesquisa (UF, data, fonte) VALUES('?', '?',''?)";
+        String query = "INSERT INTO candidato_pesquisa (UF, data, fonte) VALUES('?', '?',''?)";
 //        String query2 = "INSERT INTO candidato_pesquisa(candidato_idCandidato,porcentagem) VALUES('?','?')";
         String query2 = "INSERT INTO candidato_pesquisa(porcentagem) VALUES('?')";
 
@@ -20,18 +20,18 @@ public class PesquisaStorage {
         try {
             conexao = BddConection.getConexao();
 
-            statement = conexao.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
-            statement = conexao.prepareStatement(query2, Statement.RETURN_GENERATED_KEYS);
-            statement.setString(1, String.valueOf(pesquisa.getUf()));
-            statement.setDate(2, new java.sql.Date(pesquisa.getData().getTime()));
-            statement.setString(3, pesquisa.getFonte());
-            statement.setString(4,  Float.toString(pesquisa.getPorcentagem()));
-            statement.execute();
+            // statement = conexao.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            // statement = conexao.prepareStatement(query2, Statement.RETURN_GENERATED_KEYS);
+            // statement.setString(1, String.valueOf(pesquisa.getUf()));
+            // statement.setDate(2, new java.sql.Date(pesquisa.getData().getTime()));
+            // statement.setString(3, pesquisa.getFonte());
+            // statement.setString(4,  Float.toString(pesquisa.getPorcentagem()));
+            // statement.execute();
 
             resultSet = statement.getGeneratedKeys();
 
             if (resultSet.next()) {
-                pesquisa.setIdPesquisa(resultSet.getInt(1));
+                // pesquisa.setIdPesquisa(resultSet.getInt(1));
             }
         } catch (SQLException e){
             e.printStackTrace();
@@ -129,7 +129,6 @@ public class PesquisaStorage {
     public static List<Pesquisa> listar(){
         List<Pesquisa> pesquisas = new ArrayList<>();
 
-        //String query = "Select * from pesquisa order by data";
         String query = "SELECT * FROM pesquisa p JOIN candidato_pesquisa cp ON p.idpesquisa = cp.pesquisa_idpesquisa ORDER BY data;";
 
         Connection conexao = null;
