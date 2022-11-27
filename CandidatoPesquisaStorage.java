@@ -6,12 +6,12 @@ import java.sql.Date;
 
 public class CandidatoPesquisaStorage {
 
-
     public static boolean inserir(CandidatoPesquisa candidatoPesquisa){
 
-        String query = "INSERT INTO candidato_pesquisa (UF, data, fonte) VALUES('?', '?',''?)";
+//        String query = "INSERT INTO candidato_pesquisa (UF, data, fonte) VALUES('?', '?',''?)";
 //        String query2 = "INSERT INTO candidato_pesquisa(candidato_idCandidato,porcentagem) VALUES('?','?')";
-        String query2 = "INSERT INTO candidato_pesquisa(porcentagem) VALUES('?')";
+//        String query2 = "INSERT INTO candidato_pesquisa(porcentagem) VALUES('?')";
+        String query =  "insert into candidato_pesquisa (candidato_idcandidato,pesquisa_idpesquisa,porcentagem) values (?,?,?);";
 
         Connection conexao = null;
         PreparedStatement statement = null;

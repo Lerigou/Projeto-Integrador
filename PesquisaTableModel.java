@@ -8,7 +8,7 @@ public class PesquisaTableModel extends AbstractTableModel {
     // Cria um array chamado pesquisas
     private List<Pesquisa> pesquisas = new ArrayList<>();
     // Configura as colunas das tabelas
-    private String[] colunas = new String[]{"id", "porcentagem", "Unidade de Federação", "Data", "Fonte"};
+    private String[] colunas = new String[]{"id", "porcentagem", "Unidade de Federação", "Data", "Fonte", "Candidato"};
 
     public PesquisaTableModel(List<Pesquisa> pesquisas){
         this.pesquisas = pesquisas;
@@ -56,6 +56,8 @@ public class PesquisaTableModel extends AbstractTableModel {
             case 4:
                 value = pesquisa.getFonte();
                 break;
+            case 5:
+                value = String.valueOf(pesquisa.getNomeCandidato());
             default:
                 System.err.printf("[ERRO] Indice de coluna invalido: %d%n", colId);
         }

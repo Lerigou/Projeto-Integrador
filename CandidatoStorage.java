@@ -160,4 +160,44 @@ public class CandidatoStorage {
         return candidatos;
     }
 
+    public static List<Candidato> listarNome(){
+        List<Candidato> candidatos = new ArrayList<>();
+
+        String query = "SELECT * FROM candidato ORDER BY idCandidato";
+
+        Connection conexao = null;
+        Statement statement = null;
+        ResultSet resultSet = null;
+
+        try {
+            conexao = BddConection.getConexao();
+
+            statement = conexao.createStatement();
+            resultSet = statement.executeQuery(query);
+
+            while (resultSet.next()) {
+                Candidato candidato = new Candidato();
+                candidato.setNomeCandidato(resultSet.getString("nomeCandidato"));
+
+                candidatos.add(candidato);
+            }
+        } catch (SQLException e ) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (statement != null) {
+                    statement.close();
+                }
+
+                if (resultSet != null) {
+                    resultSet.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return candidatos;
+    }
+
 }

@@ -1,33 +1,13 @@
-import java.awt.*;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.sql.Date;
 
 public class PesquisaStorage {
 
 
     public static boolean inserir(Pesquisa pesquisa){
 
-        String query = "INSERT INTO pesquisa (UF, data, fonte) VALUES(?, ?,?)";
-
-//        String query2 = "INSERT INTO candidato_pesquisa(candidato_idCandidato,porcentagem) VALUES('?','?')";
-        //String query2 = "INSERT INTO candidato_pesquisa(candidato_idcandidato,pesquisa_idpesquisa,porcentagem) VALUES(?,?,?)";
-
-
-                // String query = "BEGIN;" +
-                // "INSERT INTO pesquisa (UF, data,fonte)" +
-                // "  VALUES('?', '?',''?);" +
-                // "INSERT INTO candidato_pesquisa(candidato_idCandidato,porcentagem)" +
-                // "  VALUES('?','?');" +
-                // "COMMIT;";
-
-//         String query = "INSERT INTO pesquisa (UF, data, fonte) VALUES('?', '?',''?)";
-//         String query2 = "INSERT INTO candidato_pesquisa(candidato_idCandidato,porcentagem) VALUES('?','?')";
-//         String query2 = "INSERT INTO candidato_pesquisa(porcentagem) VALUES('?')";
-
-
-
+        String query = "INSERT INTO pesquisa (UF, data, fonte) VALUES(?, ?, ?)";
         Connection conexao = null;
         PreparedStatement statement = null;
         ResultSet resultSet = null;
@@ -37,35 +17,11 @@ public class PesquisaStorage {
 
             statement = conexao.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 
-            //statement = conexao.prepareStatement(query2, Statement.RETURN_GENERATED_KEYS);
-
             statement.setString(1, String.valueOf(pesquisa.getUf()));
             statement.setDate(2, new java.sql.Date(pesquisa.getData().getTime()));
             statement.setString(3, pesquisa.getFonte());
             
-            //TA DANDO ERRO NO FLOAT
-            //statement.setString(4,  Float.toString(pesquisa.getPorcentagem()));
-
-
-
-            //statement.setString(1,  Double.toString(pesquisa.getPorcentagem()));
-            //statement.setString(1, String.valueOf(pesquisa.getUf()));
-            //statement.setDate(2, new java.sql.Date(pesquisa.getData().getTime()));
-            //statement.setString(3, pesquisa.getFonte());
-
-            // statement = conexao.prepareStatement(query2, Statement.RETURN_GENERATED_KEYS);
-            // statement.setString(1, String.valueOf(pesquisa.getUf()));
-            // statement.setDate(2, new java.sql.Date(pesquisa.getData().getTime()));
-            // statement.setString(3, pesquisa.getFonte());
-            // statement.setString(4,  Float.toString(pesquisa.getPorcentagem()));
-
-
-            //statement = conexao.prepareStatement(query2, Statement.RETURN_GENERATED_KEYS);
-            // statement.setString(1, String.valueOf(pesquisa.getUf()));
-            // statement.setDate(2, new java.sql.Date(pesquisa.getData().getTime()));
-            // statement.setString(3, pesquisa.getFonte());
-            // statement.setString(4,  Float.toString(pesquisa.getPorcentagem()));
-
+            statement.setString(4, pesquisa.getNomeCandidato());
 
             statement.execute();
 
@@ -173,16 +129,16 @@ public class PesquisaStorage {
     public static List<Pesquisa> listar(){
         List<Pesquisa> pesquisas = new ArrayList<>();
 
-        //String query = "SELECT cp.pesquisa_idpesquisa, c.nomeCandidato, p.uf, p.data, p.fonte FROM pesquisa p JOIN candidato_pesquisa cp ON p.idpesquisa = cp.pesquisa_idpesquisa JOIN candidato c on c.idcandidato = cp.candidato_idcandidato ORDER BY cp.idpesquisa;";
-        //String query = "SELECT * FROM pesquisa p JOIN candidato_pesquisa cp ON p.idpesquisa = cp.pesquisa_idpesquisa ORDER BY idpesquisa;";
-        String query2 = "SELECT * FROM pesquisa;"; //------<<ADD ESSA LINHA AQUI e comentei a de cima>>-----//
+        String query = "SELECT p.*, cp.porcentagem, c.nomeCandidato FROM pesquisa p JOIN candidato_pesquisa cp ON p.idpesquisa = cp.pesquisa_idpesquisa JOIN candidato c on c.idcandidato = cp.candidato_idcandidato ORDER BY idpesquisa";
+//        String query = "SELECT * FROM pesquisa p JOIN candidato_pesquisa cp ON p.idpesquisa = cp.pesquisa_idpesquisa ORDER BY idpesquisa;";
+//        String query = "SELECT * FROM pesquisa";
+
+
 
         //String query = "SELECT * FROM pesquisa ORDER BY data";
         // A utilização desse JOIN ta dando erro
         //String query = "SELECT * FROM pesquisa p INNER JOIN candidato_pesquisa cp ON p.idpesquisa = cp.pesquisa_idpesquisa ORDER BY data";
         //String query = "SELECT * FROM pesquisa p JOIN candidato_pesquisa cp ON p.idpesquisa = cp.pesquisa_idpesquisa ORDER BY data;";
-
-
 
         Connection conexao = null;
         Statement statement = null;
@@ -198,11 +154,12 @@ public class PesquisaStorage {
                 Pesquisa pesquisa = new Pesquisa();
 
                 pesquisa.setIdPesquisa(resultSet.getInt("idPesquisa"));
-                //pesquisa.setPorcentagem(resultSet.getFloat("porcentagem")); //------<<comentei aqui>>-----//
+                pesquisa.setPorcentagem(resultSet.getFloat("Porcentagem"));
 
                 pesquisa.setUf(resultSet.getString("UF"));
-                pesquisa.setData(resultSet.getDate("data"));
-                pesquisa.setFonte(resultSet.getString("fonte"));
+                pesquisa.setData(resultSet.getDate("Data"));
+                pesquisa.setFonte(resultSet.getString("Fonte"));
+                pesquisa.setNomeCandidato(resultSet.getString("nomeCandidato"));
 
                 pesquisas.add(pesquisa);
             }
@@ -224,5 +181,6 @@ public class PesquisaStorage {
 
         return pesquisas;
     }
+
 
 }

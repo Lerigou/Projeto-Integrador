@@ -10,8 +10,6 @@ public class Principal extends JPanel {
 
     private Janela janela;
     private BorderLayout layout;
-    private CandidatoTableModel tableModel;
-    private JTable tabela;
     private JButton candidatoBtn;
     private JButton pesquisaBtn;
 
