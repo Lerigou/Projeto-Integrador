@@ -6,12 +6,12 @@ import java.sql.Date;
 
 public class CandidatoPesquisaStorage {
 
-
     public static boolean inserir(CandidatoPesquisa candidatoPesquisa){
 
-        String query = "INSERT INTO candidato_pesquisa (UF, data, fonte) VALUES('?', '?',''?)";
+//        String query = "INSERT INTO candidato_pesquisa (UF, data, fonte) VALUES('?', '?',''?)";
 //        String query2 = "INSERT INTO candidato_pesquisa(candidato_idCandidato,porcentagem) VALUES('?','?')";
-        String query2 = "INSERT INTO candidato_pesquisa(porcentagem) VALUES('?')";
+//        String query2 = "INSERT INTO candidato_pesquisa(porcentagem) VALUES('?')";
+        String query =  "insert into candidato_pesquisa (candidato_idcandidato,pesquisa_idpesquisa,porcentagem) values (?,?,?);";
 
         Connection conexao = null;
         PreparedStatement statement = null;
@@ -145,7 +145,7 @@ public class CandidatoPesquisaStorage {
                 Pesquisa pesquisa = new Pesquisa();
                 pesquisa.setIdPesquisa(resultSet.getInt("idPesquisa"));
                 pesquisa.setPorcentagem(resultSet.getFloat("porcentagem"));
-                pesquisa.setUf(resultSet.getString("UF").charAt(0));
+                pesquisa.setUf(resultSet.getString("UF"));
                 pesquisa.setData(resultSet.getDate("data"));
                 pesquisa.setFonte(resultSet.getString("fonte"));
 

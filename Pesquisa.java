@@ -3,7 +3,7 @@ import java.util.Date;
 public class Pesquisa extends CandidatoPesquisa{
 
     private int idPesquisa;
-    private char uf;
+    private String uf;
     private Date data;
     private String fonte;
 
@@ -15,11 +15,11 @@ public class Pesquisa extends CandidatoPesquisa{
         this.idPesquisa = idPesquisa;
     }
 
-    public char getUf() {
+    public String getUf() {
         return uf;
     }
 
-    public void setUf(char uf) {
+    public void setUf(String uf) {
         this.uf = uf;
     }
 

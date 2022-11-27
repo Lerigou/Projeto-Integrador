@@ -5,6 +5,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.List;
 
 public class PesquisaFormPanel extends JPanel {
 
@@ -16,12 +17,12 @@ public class PesquisaFormPanel extends JPanel {
     private JTextField txtUF;
     private JTextField txtData;
     private JTextField txtFonte;
-
-//    private JComboBox<Candidato> comboBox;
     private JTextField txtPorcentagem;
     private JButton btnSalvar;
     private JButton btnCancelar;
-    private ArrayList<Candidato> candidatos;
+//    private ArrayList<Candidato> candidatos;
+    private List<Candidato> candidatos = new ArrayList<Candidato>();
+    private CandidatoStorage candidatoStorage;
 
     public PesquisaFormPanel(Janela janela){
         this.janela = janela;
@@ -100,7 +101,6 @@ public class PesquisaFormPanel extends JPanel {
         txtData.setForeground(janela.corContrasteBlue);
         txtData.setFont(new Font("Arial", Font.BOLD, 15));
 
-
         txtData.addMouseListener(new java.awt.event.MouseAdapter(){
             public void mouseEntered(java.awt.event.MouseEvent e){
                 if (txtData.getText().equals("")){
@@ -138,8 +138,8 @@ public class PesquisaFormPanel extends JPanel {
         candidatoJComboBox.setFont(new Font("Arial", Font.BOLD, 15));
         candidatoJComboBox.addItem("Selecione um candidato");
         candidatoJComboBox.setSelectedIndex(0);
+        popularComboBox();
 
-//        TODO encontrar o motivo de ele dizer q esse candidatos pode ser null
         for (int i = 0; i < candidatos.size(); i++) {
             candidatoJComboBox.addItem(candidatos.get(i).getNomeCandidato());
         }
@@ -154,7 +154,11 @@ public class PesquisaFormPanel extends JPanel {
         candidatoJComboBox.setBorder(line);
 
         gerarBtns();
+    }
 
+    private void popularComboBox(){
+        candidatoStorage = new CandidatoStorage();
+        this.candidatos = candidatoStorage.listarNome();
     }
 
     private void gerarBtns() {
@@ -198,7 +202,7 @@ public class PesquisaFormPanel extends JPanel {
                 if (PesquisaFormPanel.this.pesquisa == null){
                     Pesquisa novaPesquisa = new Pesquisa();
 //                   charAt(0) pra pegar o primeiro char da String
-                    novaPesquisa.setUf((txtUF.getText()).charAt(0));
+                    novaPesquisa.setUf(txtUF.getText());
 //                    transformando string em date
                     novaPesquisa.setData(Date.valueOf(txtData.getText()));
                     novaPesquisa.setFonte(txtFonte.getText());
@@ -212,7 +216,7 @@ public class PesquisaFormPanel extends JPanel {
                             "Cadastro Pesquisa",
                             JOptionPane.INFORMATION_MESSAGE);
                 } else {
-                    pesquisa.setUf((txtUF.getText()).charAt(0));
+                    pesquisa.setUf(txtUF.getText());
                     pesquisa.setData(Date.valueOf(txtData.getText()));
                     pesquisa.setFonte(txtFonte.getText());
 
