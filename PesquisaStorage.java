@@ -20,6 +20,7 @@ public class PesquisaStorage {
             statement.setString(1, String.valueOf(pesquisa.getUf()));
             statement.setDate(2, new java.sql.Date(pesquisa.getData().getTime()));
             statement.setString(3, pesquisa.getFonte());
+            
             statement.setString(4, pesquisa.getNomeCandidato());
 
             statement.execute();
@@ -50,6 +51,8 @@ public class PesquisaStorage {
     }
 
     public static boolean atualizar(Pesquisa pesquisa){
+
+        //ARRUMAR QUESTÃO PORCENTAGEM
 
         String query = "BEGIN;" +
                 "UPDATE pesquisa SET uf = ?, data = ?, fonte = ? WHERE idPesquisa = ?;" +
@@ -131,6 +134,7 @@ public class PesquisaStorage {
 //        String query = "SELECT * FROM pesquisa";
 
 
+
         //String query = "SELECT * FROM pesquisa ORDER BY data";
         // A utilização desse JOIN ta dando erro
         //String query = "SELECT * FROM pesquisa p INNER JOIN candidato_pesquisa cp ON p.idpesquisa = cp.pesquisa_idpesquisa ORDER BY data";
@@ -144,7 +148,7 @@ public class PesquisaStorage {
             conexao = BddConection.getConexao();
 
             statement = conexao.createStatement();
-            resultSet = statement.executeQuery(query);
+            resultSet = statement.executeQuery(query2);
 
             while (resultSet.next()) {
                 Pesquisa pesquisa = new Pesquisa();

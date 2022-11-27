@@ -9,6 +9,10 @@ public class BddConection {
     private static final String SENHA = "root";
 //    private static final String SENHA = "1234";
 
+    //private static final String SENHA = "root";
+    //private static final String SENHA = "KEIF4632"; //1234 no git
+
+
     private static Connection conexao;
     private BddConection() {}
 
