@@ -145,7 +145,7 @@ public class CandidatoPesquisaStorage {
                 Pesquisa pesquisa = new Pesquisa();
                 pesquisa.setIdPesquisa(resultSet.getInt("idPesquisa"));
                 pesquisa.setPorcentagem(resultSet.getFloat("porcentagem"));
-                pesquisa.setUf(resultSet.getString("UF").charAt(0));
+                pesquisa.setUf(resultSet.getString("UF"));
                 pesquisa.setData(resultSet.getDate("data"));
                 pesquisa.setFonte(resultSet.getString("fonte"));
 

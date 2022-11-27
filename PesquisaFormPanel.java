@@ -173,7 +173,7 @@ public class PesquisaFormPanel extends JPanel {
                 if (PesquisaFormPanel.this.pesquisa == null){
                     Pesquisa novaPesquisa = new Pesquisa();
 //                   charAt(0) pra pegar o primeiro char da String
-                    novaPesquisa.setUf((txtUF.getText()).charAt(0));
+                    novaPesquisa.setUf(txtUF.getText());
 //                    transformando string em date
                     novaPesquisa.setData(Date.valueOf(txtData.getText()));
                     novaPesquisa.setFonte(txtFonte.getText());
@@ -186,7 +186,7 @@ public class PesquisaFormPanel extends JPanel {
                             "Cadastro Pesquisa",
                             JOptionPane.INFORMATION_MESSAGE);
                 } else {
-                    pesquisa.setUf((txtUF.getText()).charAt(0));
+                    pesquisa.setUf(txtUF.getText());
                     pesquisa.setData(Date.valueOf(txtData.getText()));
                     pesquisa.setFonte(txtFonte.getText());
 

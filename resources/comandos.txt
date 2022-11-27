@@ -1,0 +1,7 @@
+Comando para rodar o projeto no:
+
+    WINDOWS -
+    java -cp ".;./resources/mysql-connector-j-8.0.31.jar" MainClass
+
+    LINUX / MAC -
+    java -cp ".:./resources/mysql-connector-j-8.0.31.jar" MainClass

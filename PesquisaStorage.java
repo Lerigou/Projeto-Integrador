@@ -44,7 +44,7 @@ public class PesquisaStorage {
             statement.setString(3, pesquisa.getFonte());
             
             //TA DANDO ERRO NO FLOAT
-            statement.setString(4,  Float.toString(pesquisa.getPorcentagem()));
+            //statement.setString(4,  Float.toString(pesquisa.getPorcentagem()));
 
 
 
@@ -95,6 +95,8 @@ public class PesquisaStorage {
     }
 
     public static boolean atualizar(Pesquisa pesquisa){
+
+        //ARRUMAR QUESTÃO PORCENTAGEM
 
         String query = "BEGIN;" +
                 "UPDATE pesquisa SET uf = ?, data = ?, fonte = ? WHERE idPesquisa = ?;" +
@@ -172,8 +174,8 @@ public class PesquisaStorage {
         List<Pesquisa> pesquisas = new ArrayList<>();
 
         //String query = "SELECT cp.pesquisa_idpesquisa, c.nomeCandidato, p.uf, p.data, p.fonte FROM pesquisa p JOIN candidato_pesquisa cp ON p.idpesquisa = cp.pesquisa_idpesquisa JOIN candidato c on c.idcandidato = cp.candidato_idcandidato ORDER BY cp.idpesquisa;";
-        String query = "SELECT * FROM pesquisa p JOIN candidato_pesquisa cp ON p.idpesquisa = cp.pesquisa_idpesquisa ORDER BY idpesquisa;";
-
+        //String query = "SELECT * FROM pesquisa p JOIN candidato_pesquisa cp ON p.idpesquisa = cp.pesquisa_idpesquisa ORDER BY idpesquisa;";
+        String query2 = "SELECT * FROM pesquisa;"; //------<<ADD ESSA LINHA AQUI e comentei a de cima>>-----//
 
         //String query = "SELECT * FROM pesquisa ORDER BY data";
         // A utilização desse JOIN ta dando erro
@@ -190,15 +192,15 @@ public class PesquisaStorage {
             conexao = BddConection.getConexao();
 
             statement = conexao.createStatement();
-            resultSet = statement.executeQuery(query);
+            resultSet = statement.executeQuery(query2);
 
             while (resultSet.next()) {
                 Pesquisa pesquisa = new Pesquisa();
 
                 pesquisa.setIdPesquisa(resultSet.getInt("idPesquisa"));
-                pesquisa.setPorcentagem(resultSet.getFloat("porcentagem"));
+                //pesquisa.setPorcentagem(resultSet.getFloat("porcentagem")); //------<<comentei aqui>>-----//
 
-                pesquisa.setUf(resultSet.getString("UF").charAt(0));
+                pesquisa.setUf(resultSet.getString("UF"));
                 pesquisa.setData(resultSet.getDate("data"));
                 pesquisa.setFonte(resultSet.getString("fonte"));
 
