@@ -1,8 +1,6 @@
-import java.awt.*;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.sql.Date;
 
 public class PesquisaStorage {
 
@@ -44,7 +42,8 @@ public class PesquisaStorage {
             statement.setString(3, pesquisa.getFonte());
             
             //TA DANDO ERRO NO FLOAT
-            statement.setString(4,  Float.toString(pesquisa.getPorcentagem()));
+            // Está dando erro na linha abaixo pq no insert só tem 3 parâmetros e aqui, são passados 4
+//            statement.setString(4,  Float.toString(pesquisa.getPorcentagem()));
 
 
 
@@ -221,6 +220,48 @@ public class PesquisaStorage {
         }
 
         return pesquisas;
+    }
+
+//    TODO em um dos varios tutoriais q eu assisti, um cara criava esse método
+//    TODO mas eu n sei como chamar ele quando eu crio o panel de pesquisa
+//    TODO tbm n sei se eu preciso chamar ele no panel msm ou em outro lugar
+    public static List<Candidato> listarComboBox(){
+        List<Candidato> candidatos = new ArrayList<>();
+
+        String query = "SELECT * FROM candidato ORDER BY nomeCandidato";
+
+        Connection conexao = null;
+        Statement statement = null;
+        ResultSet resultSet = null;
+
+        try {
+            conexao = BddConection.getConexao();
+
+            statement = conexao.createStatement();
+            resultSet = statement.executeQuery(query);
+
+            while (resultSet.next()) {
+                Candidato candidato = new Candidato();
+                candidato.setNomeCandidato(resultSet.getString("nomeCandidato"));
+                candidatos.add(candidato);
+            }
+        } catch (SQLException e ) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (statement != null) {
+                    statement.close();
+                }
+
+                if (resultSet != null) {
+                    resultSet.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return candidatos;
     }
 
 }

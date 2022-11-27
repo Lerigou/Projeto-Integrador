@@ -4,6 +4,7 @@ import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.*;
 import java.sql.Date;
+import java.util.ArrayList;
 
 public class PesquisaFormPanel extends JPanel {
 
@@ -15,9 +16,12 @@ public class PesquisaFormPanel extends JPanel {
     private JTextField txtUF;
     private JTextField txtData;
     private JTextField txtFonte;
-    private JTextField txtPorcentagem;;
+
+//    private JComboBox<Candidato> comboBox;
+    private JTextField txtPorcentagem;
     private JButton btnSalvar;
     private JButton btnCancelar;
+    private ArrayList<Candidato> candidatos;
 
     public PesquisaFormPanel(Janela janela){
         this.janela = janela;
@@ -96,6 +100,7 @@ public class PesquisaFormPanel extends JPanel {
         txtData.setForeground(janela.corContrasteBlue);
         txtData.setFont(new Font("Arial", Font.BOLD, 15));
 
+
         txtData.addMouseListener(new java.awt.event.MouseAdapter(){
             public void mouseEntered(java.awt.event.MouseEvent e){
                 if (txtData.getText().equals("")){
@@ -123,10 +128,30 @@ public class PesquisaFormPanel extends JPanel {
         txtFonte.setFont(new Font("Arial", Font.BOLD, 15));
         adicionarComponente(txtFonte, 4, 2);
 
+        label = new JLabel("Candidato");
+        label.setFont(new Font("Arial", Font.BOLD, 15));
+        label.setForeground(janela.corContrasteBlue);
+        adicionarComponente(label, 5, 0);
+        JComboBox<String> candidatoJComboBox = new JComboBox<String>();
+        candidatoJComboBox.setBackground(janela.corSecundariaPink);
+        candidatoJComboBox.setForeground(janela.corContrasteBlue);
+        candidatoJComboBox.setFont(new Font("Arial", Font.BOLD, 15));
+        candidatoJComboBox.addItem("Selecione um candidato");
+        candidatoJComboBox.setSelectedIndex(0);
+
+//        TODO encontrar o motivo de ele dizer q esse candidatos pode ser null
+        for (int i = 0; i < candidatos.size(); i++) {
+            candidatoJComboBox.addItem(candidatos.get(i).getNomeCandidato());
+        }
+
+        adicionarComponente(candidatoJComboBox, 5, 2);
+
         Border line = new LineBorder(janela.corPrincipal);
+        txtPorcentagem.setBorder(line);
         txtUF.setBorder(line);
         txtData.setBorder(line);
         txtFonte.setBorder(line);
+        candidatoJComboBox.setBorder(line);
 
         gerarBtns();
 
@@ -177,12 +202,13 @@ public class PesquisaFormPanel extends JPanel {
 //                    transformando string em date
                     novaPesquisa.setData(Date.valueOf(txtData.getText()));
                     novaPesquisa.setFonte(txtFonte.getText());
+//                    TODO precisa adicionar o candidato selecionado aqui
 
                    // novaPesquisa.setPorcentagem(txtPorcentagem.getText());
 
                     PesquisaStorage.inserir(novaPesquisa);
                     JOptionPane.showMessageDialog(PesquisaFormPanel.this,
-                            "Pesquisa cadastrado com sucesso",
+                            "Pesquisa cadastrada com sucesso",
                             "Cadastro Pesquisa",
                             JOptionPane.INFORMATION_MESSAGE);
                 } else {
@@ -192,7 +218,7 @@ public class PesquisaFormPanel extends JPanel {
 
                     PesquisaStorage.atualizar(PesquisaFormPanel.this.pesquisa);
                     JOptionPane.showMessageDialog(PesquisaFormPanel.this,
-                            "Pesquisa editado com sucesso",
+                            "Pesquisa editada com sucesso",
                             "Cadastro Pesquisa",
                             JOptionPane.INFORMATION_MESSAGE);
                 }

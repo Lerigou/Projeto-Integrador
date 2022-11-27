@@ -8,7 +8,7 @@ public class PesquisaTableModel extends AbstractTableModel {
     // Cria um array chamado pesquisas
     private List<Pesquisa> pesquisas = new ArrayList<>();
     // Configura as colunas das tabelas
-    private String[] colunas = new String[]{"id", "porcentagem", "Unidade de Federação", "Data", "Fonte"};
+    private String[] colunas = new String[]{"id", "candidato", "porcentagem", "Unidade de Federação", "Data", "Fonte"};
 
     public PesquisaTableModel(List<Pesquisa> pesquisas){
         this.pesquisas = pesquisas;
