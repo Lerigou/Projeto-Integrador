@@ -117,7 +117,7 @@ public class PesquisaFormPanel extends JPanel {
             public void mouseExited(java.awt.event.MouseEvent e){
                 if (txtData.getText().equals("XXXX-XX-XX")){
                     txtData.setText("");
-                    txtData.setForeground(janela.corSecundariaBlueLight);
+                    txtData.setForeground(janela.corContrasteBlue);
                 }
             }
         });

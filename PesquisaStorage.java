@@ -22,7 +22,7 @@ public class PesquisaStorage {
             statement.setDate(3, new java.sql.Date(pesquisa.getData().getTime()));
             statement.setString(4, pesquisa.getFonte());
             
-            //o q esse faz?
+            
             statement.setInt(5, pesquisa.getIdCandidato()); //erro da marcia: Erro no parametro 5
 
             statement.execute();
@@ -54,12 +54,8 @@ public class PesquisaStorage {
 
     public static boolean atualizar(Pesquisa pesquisa){
 
-        //ARRUMAR QUESTÃO PORCENTAGEM
-
-        String query = "BEGIN;" +
-                "UPDATE pesquisa SET uf = ?, data = ?, fonte = ? WHERE idPesquisa = ?;" +
-                "UPDATE candidato_pesquisa SET candidato_idCandidato = ?, pesquisa_idPesquisaa = ?, porcentagem = ? WHERE idPesquisa = ?;" +
-                "COMMIT;";
+        //String query = "UPDATE pesquisa SET porcentagem = ?, UF = ?, data = ?, fonte = ?, Candidato_idCandidato = ? WHERE idPesquisa = ?;";
+        String query = "UPDATE pesquisa SET porcentagem = ?, UF = ?, data = ?, fonte = ?, Candidato_idCandidato = ? WHERE idPesquisa = ?;";
 
         Connection conexao = null;
         PreparedStatement statement = null;
@@ -72,6 +68,8 @@ public class PesquisaStorage {
             statement.setString(2, String.valueOf(pesquisa.getUf()));
             statement.setDate(3, new java.sql.Date(pesquisa.getData().getTime()));
             statement.setString(4, pesquisa.getFonte());
+            statement.setInt(5, pesquisa.getIdCandidato());
+            statement.setInt(6, pesquisa.getIdPesquisa());
             statement.execute();
 
         } catch (SQLException e ) {
@@ -133,7 +131,7 @@ public class PesquisaStorage {
 
         //String query = "SELECT p.*, cp.porcentagem, c.nomeCandidato FROM pesquisa p JOIN candidato_pesquisa cp ON p.idpesquisa = cp.pesquisa_idpesquisa JOIN candidato c on c.idcandidato = cp.candidato_idcandidato ORDER BY idpesquisa";
 //        String query = "SELECT * FROM pesquisa p JOIN candidato_pesquisa cp ON p.idpesquisa = cp.pesquisa_idpesquisa ORDER BY idpesquisa;";
-        String query = "SELECT p.idPesquisa, p.porcentagem, p.UF, p.data, p.fonte, c.nomeCandidato FROM pesquisa p JOIN candidato c ON p.Candidato_idCandidato = c.idCandidato;";
+        String query = "SELECT p.idPesquisa, p.porcentagem, p.UF, p.data, p.fonte, c.nomeCandidato FROM pesquisa p JOIN candidato c ON p.Candidato_idCandidato = c.idCandidato ORDER BY p.data DESC";
 
 
 
