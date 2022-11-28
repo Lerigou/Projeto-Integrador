@@ -18,6 +18,7 @@ public class PesquisaFormPanel extends JPanel {
     private JTextField txtData;
     private JTextField txtFonte;
     private JTextField txtPorcentagem;
+    private JTextField txtCandidato;
     private JButton btnSalvar;
     private JButton btnCancelar;
 //    private ArrayList<Candidato> candidatos;
@@ -38,15 +39,19 @@ public class PesquisaFormPanel extends JPanel {
             public void componentShown(ComponentEvent e) {
                 if (pesquisa == null){
                     txtId.setText("");
+                    txtPorcentagem.setText("");
                     txtUF.setText("");
                     txtData.setText("");
                     txtFonte.setText("");
+                    txtCandidato.setText("");
                 } else {
                     txtId.setText(Integer.toString(pesquisa.getIdPesquisa()));
+                    txtPorcentagem.setText(Float.toString(pesquisa.getPorcentagem()));
                     txtUF.setText(String.valueOf(pesquisa.getUf()));
 //                    Transformando date em string
                     txtData.setText(String.valueOf(pesquisa.getData()));
                     txtFonte.setText(pesquisa.getFonte());
+                    txtCandidato.setText(Integer.toString(pesquisa.getIdCandidato()));
                 }
             }
         });
@@ -77,12 +82,13 @@ public class PesquisaFormPanel extends JPanel {
         label.setForeground(janela.corContrasteBlue);
         adicionarComponente(label, 1, 0);
         txtPorcentagem = new JTextField(5);
-        txtPorcentagem.setEditable(false);
-        txtPorcentagem.setBackground(janela.corSecundariaBlueLight);
+        txtPorcentagem.setEditable(true);
+        txtPorcentagem.setBackground(janela.corSecundariaPink);
+        txtPorcentagem.setForeground(janela.corContrasteBlue);
         txtPorcentagem.setFont(new Font("Arial", Font.BOLD, 15));
         adicionarComponente(txtPorcentagem,1,2);
 
-        label = new JLabel("Unidade de Federação");
+        label = new JLabel("Unidade da Federacao");
         label.setFont(new Font("Arial", Font.BOLD, 15));
         label.setForeground(janela.corContrasteBlue);
         adicionarComponente(label, 2, 0);
@@ -128,10 +134,20 @@ public class PesquisaFormPanel extends JPanel {
         txtFonte.setFont(new Font("Arial", Font.BOLD, 15));
         adicionarComponente(txtFonte, 4, 2);
 
-        label = new JLabel("Candidato");
+        label = new JLabel("ID Candidato");
         label.setFont(new Font("Arial", Font.BOLD, 15));
         label.setForeground(janela.corContrasteBlue);
         adicionarComponente(label, 5, 0);
+        txtCandidato = new JTextField(15);
+        txtCandidato.setBackground(janela.corSecundariaPink);
+        txtCandidato.setForeground(janela.corContrasteBlue);
+        txtCandidato.setFont(new Font("Arial", Font.BOLD, 15));
+        adicionarComponente(txtCandidato, 5, 2);
+
+        /*label = new JLabel("Candidato");
+        label.setFont(new Font("Arial", Font.BOLD, 15));
+        label.setForeground(janela.corContrasteBlue);
+        adicionarComponente(label, 6, 0);
         JComboBox<String> candidatoJComboBox = new JComboBox<String>();
         candidatoJComboBox.setBackground(janela.corSecundariaPink);
         candidatoJComboBox.setForeground(janela.corContrasteBlue);
@@ -144,22 +160,23 @@ public class PesquisaFormPanel extends JPanel {
             candidatoJComboBox.addItem(candidatos.get(i).getNomeCandidato());
         }
 
-        adicionarComponente(candidatoJComboBox, 5, 2);
+        adicionarComponente(candidatoJComboBox, 6, 2);*/
 
         Border line = new LineBorder(janela.corPrincipal);
         txtPorcentagem.setBorder(line);
         txtUF.setBorder(line);
         txtData.setBorder(line);
         txtFonte.setBorder(line);
-        candidatoJComboBox.setBorder(line);
+        txtCandidato.setBorder(line);
+        //candidatoJComboBox.setBorder(line);
 
         gerarBtns();
     }
 
-    private void popularComboBox(){
+    /*private void popularComboBox(){
         candidatoStorage = new CandidatoStorage();
         this.candidatos = candidatoStorage.listarNome();
-    }
+    }*/
 
     private void gerarBtns() {
         JPanel btnPanel = new JPanel();
@@ -203,9 +220,11 @@ public class PesquisaFormPanel extends JPanel {
                     Pesquisa novaPesquisa = new Pesquisa();
 //                   charAt(0) pra pegar o primeiro char da String
                     novaPesquisa.setUf(txtUF.getText());
+                    novaPesquisa.setPorcentagem(Float.parseFloat(txtPorcentagem.getText()));
 //                    transformando string em date
                     novaPesquisa.setData(Date.valueOf(txtData.getText()));
                     novaPesquisa.setFonte(txtFonte.getText());
+                    novaPesquisa.setIdCandidato(Integer.parseInt(txtCandidato.getText()));
 //                    TODO precisa adicionar o candidato selecionado aqui
 
                    // novaPesquisa.setPorcentagem(txtPorcentagem.getText());
@@ -217,8 +236,10 @@ public class PesquisaFormPanel extends JPanel {
                             JOptionPane.INFORMATION_MESSAGE);
                 } else {
                     pesquisa.setUf(txtUF.getText());
+                    pesquisa.setPorcentagem(Float.parseFloat(txtPorcentagem.getText()));
                     pesquisa.setData(Date.valueOf(txtData.getText()));
                     pesquisa.setFonte(txtFonte.getText());
+                    pesquisa.setIdCandidato(Integer.parseInt(txtCandidato.getText()));
 
                     PesquisaStorage.atualizar(PesquisaFormPanel.this.pesquisa);
                     JOptionPane.showMessageDialog(PesquisaFormPanel.this,
