@@ -1,173 +1,175 @@
-import java.awt.*;
-import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.sql.Date;
+// import java.awt.*;
+// import java.sql.*;
+// import java.util.ArrayList;
+// import java.util.List;
+// import java.sql.Date;
 
-public class CandidatoPesquisaStorage {
 
-    public static boolean inserir(CandidatoPesquisa candidatoPesquisa){
+// //ESSE AQUI N USA MAIS
+// public class CandidatoPesquisaStorage {
 
-//        String query = "INSERT INTO candidato_pesquisa (UF, data, fonte) VALUES('?', '?',''?)";
-//        String query2 = "INSERT INTO candidato_pesquisa(candidato_idCandidato,porcentagem) VALUES('?','?')";
-//        String query2 = "INSERT INTO candidato_pesquisa(porcentagem) VALUES('?')";
-        String query =  "insert into candidato_pesquisa (candidato_idcandidato,pesquisa_idpesquisa,porcentagem) values (?,?,?);";
+//     public static boolean inserir(CandidatoPesquisa candidatoPesquisa){
 
-        Connection conexao = null;
-        PreparedStatement statement = null;
-        ResultSet resultSet = null;
+// //        String query = "INSERT INTO candidato_pesquisa (UF, data, fonte) VALUES('?', '?',''?)";
+// //        String query2 = "INSERT INTO candidato_pesquisa(candidato_idCandidato,porcentagem) VALUES('?','?')";
+// //        String query2 = "INSERT INTO candidato_pesquisa(porcentagem) VALUES('?')";
+//         String query =  "insert into candidato_pesquisa (candidato_idcandidato,pesquisa_idpesquisa,porcentagem) values (?,?,?);";
 
-        try {
-            conexao = BddConection.getConexao();
+//         Connection conexao = null;
+//         PreparedStatement statement = null;
+//         ResultSet resultSet = null;
 
-            // statement = conexao.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
-            // statement = conexao.prepareStatement(query2, Statement.RETURN_GENERATED_KEYS);
-            // statement.setString(1, String.valueOf(pesquisa.getUf()));
-            // statement.setDate(2, new java.sql.Date(pesquisa.getData().getTime()));
-            // statement.setString(3, pesquisa.getFonte());
-            // statement.setString(4,  Float.toString(pesquisa.getPorcentagem()));
-            // statement.execute();
+//         try {
+//             conexao = BddConection.getConexao();
 
-            resultSet = statement.getGeneratedKeys();
+//             // statement = conexao.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+//             // statement = conexao.prepareStatement(query2, Statement.RETURN_GENERATED_KEYS);
+//             // statement.setString(1, String.valueOf(pesquisa.getUf()));
+//             // statement.setDate(2, new java.sql.Date(pesquisa.getData().getTime()));
+//             // statement.setString(3, pesquisa.getFonte());
+//             // statement.setString(4,  Float.toString(pesquisa.getPorcentagem()));
+//             // statement.execute();
 
-            if (resultSet.next()) {
-                // pesquisa.setIdPesquisa(resultSet.getInt(1));
-            }
-        } catch (SQLException e){
-            e.printStackTrace();
-            return false;
-        } finally {
-            try {
-                if (statement != null){
-                    statement.close();
-                }
+//             resultSet = statement.getGeneratedKeys();
 
-                if (resultSet != null){
-                    resultSet.close();
-                }
-            } catch (SQLException e){
-                e.printStackTrace();
-                return false;
-            }
-        }
-        return true;
-    }
+//             if (resultSet.next()) {
+//                 // pesquisa.setIdPesquisa(resultSet.getInt(1));
+//             }
+//         } catch (SQLException e){
+//             e.printStackTrace();
+//             return false;
+//         } finally {
+//             try {
+//                 if (statement != null){
+//                     statement.close();
+//                 }
 
-    public static boolean atualizar(Pesquisa pesquisa){
+//                 if (resultSet != null){
+//                     resultSet.close();
+//                 }
+//             } catch (SQLException e){
+//                 e.printStackTrace();
+//                 return false;
+//             }
+//         }
+//         return true;
+//     }
 
-        String query = "BEGIN;" +
-                "UPDATE pesquisa SET uf = ?, data = ?, fonte = ? WHERE idPesquisa = ?;" +
-                "UPDATE candidato_pesquisa SET candidato_idCandidato = ?, pesquisa_idPesquisaa = ?, porcentagem = ? WHERE idPesquisa = ?;" +
-                "COMMIT;";
+//     public static boolean atualizar(Pesquisa pesquisa){
 
-        Connection conexao = null;
-        PreparedStatement statement = null;
+//         String query = "BEGIN;" +
+//                 "UPDATE pesquisa SET uf = ?, data = ?, fonte = ? WHERE idPesquisa = ?;" +
+//                 "UPDATE candidato_pesquisa SET candidato_idCandidato = ?, pesquisa_idPesquisaa = ?, porcentagem = ? WHERE idPesquisa = ?;" +
+//                 "COMMIT;";
 
-        try {
-            conexao = BddConection.getConexao();
+//         Connection conexao = null;
+//         PreparedStatement statement = null;
 
-            statement = conexao.prepareStatement(query);
-            statement.setString(1, Double.toString(pesquisa.getPorcentagem()));
-            statement.setString(2, String.valueOf(pesquisa.getUf()));
-            statement.setDate(3, new java.sql.Date(pesquisa.getData().getTime()));
-            statement.setString(4, pesquisa.getFonte());
-            statement.execute();
+//         try {
+//             conexao = BddConection.getConexao();
 
-        } catch (SQLException e ) {
-            e.printStackTrace();
-            return false;
+//             statement = conexao.prepareStatement(query);
+//             statement.setString(1, Double.toString(pesquisa.getPorcentagem()));
+//             statement.setString(2, String.valueOf(pesquisa.getUf()));
+//             statement.setDate(3, new java.sql.Date(pesquisa.getData().getTime()));
+//             statement.setString(4, pesquisa.getFonte());
+//             statement.execute();
 
-        } finally {
-            try {
-                if (statement != null) {
-                    statement.close();
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-                return false;
-            }
-        }
+//         } catch (SQLException e ) {
+//             e.printStackTrace();
+//             return false;
 
-        return true;
-    }
+//         } finally {
+//             try {
+//                 if (statement != null) {
+//                     statement.close();
+//                 }
+//             } catch (SQLException e) {
+//                 e.printStackTrace();
+//                 return false;
+//             }
+//         }
 
-    public static boolean remover(Pesquisa pesquisa) {
+//         return true;
+//     }
 
-        // Será q aqui não fica "WHERE idCandidato = ?"?
-        String query = "DELETE FROM candidato JOIN candidato_pesquisa" +
-                "WHERE candidato.idcandidato = candidato_pesquisa.candidato_idcandidato and candidato.idcandidato = ?";
+//     public static boolean remover(Pesquisa pesquisa) {
 
-        Connection conexao = null;
-        PreparedStatement statement = null;
+//         // Será q aqui não fica "WHERE idCandidato = ?"?
+//         String query = "DELETE FROM candidato JOIN candidato_pesquisa" +
+//                 "WHERE candidato.idcandidato = candidato_pesquisa.candidato_idcandidato and candidato.idcandidato = ?";
 
-        try {
-            conexao = BddConection.getConexao();
+//         Connection conexao = null;
+//         PreparedStatement statement = null;
 
-            statement = conexao.prepareStatement(query);
-            statement.setInt(1, pesquisa.getIdPesquisa());
-            statement.execute();
-        } catch (SQLException e ) {
-            e.printStackTrace();
-            return false;
-        } finally {
-            try {
-                if (statement != null) {
-                    statement.close();
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-                return false;
-            }
-        }
+//         try {
+//             conexao = BddConection.getConexao();
 
-        return true;
-    }
+//             statement = conexao.prepareStatement(query);
+//             statement.setInt(1, pesquisa.getIdPesquisa());
+//             statement.execute();
+//         } catch (SQLException e ) {
+//             e.printStackTrace();
+//             return false;
+//         } finally {
+//             try {
+//                 if (statement != null) {
+//                     statement.close();
+//                 }
+//             } catch (SQLException e) {
+//                 e.printStackTrace();
+//                 return false;
+//             }
+//         }
 
-    /**
-     * @return
-     */
-    public static List<Pesquisa> listar(){
-        List<Pesquisa> pesquisas = new ArrayList<>();
+//         return true;
+//     }
 
-        String query = "SELECT * FROM pesquisa p JOIN candidato_pesquisa cp ON p.idpesquisa = cp.pesquisa_idpesquisa ORDER BY data;";
+//     /**
+//      * @return
+//      */
+//     public static List<Pesquisa> listar(){
+//         List<Pesquisa> pesquisas = new ArrayList<>();
 
-        Connection conexao = null;
-        Statement statement = null;
-        ResultSet resultSet = null;
+//         String query = "SELECT * FROM pesquisa p JOIN candidato_pesquisa cp ON p.idpesquisa = cp.pesquisa_idpesquisa ORDER BY data;";
 
-        try {
-            conexao = BddConection.getConexao();
+//         Connection conexao = null;
+//         Statement statement = null;
+//         ResultSet resultSet = null;
 
-            statement = conexao.createStatement();
-            resultSet = statement.executeQuery(query);
+//         try {
+//             conexao = BddConection.getConexao();
 
-            while (resultSet.next()) {
-                Pesquisa pesquisa = new Pesquisa();
-                pesquisa.setIdPesquisa(resultSet.getInt("idPesquisa"));
-                pesquisa.setPorcentagem(resultSet.getFloat("porcentagem"));
-                pesquisa.setUf(resultSet.getString("UF"));
-                pesquisa.setData(resultSet.getDate("data"));
-                pesquisa.setFonte(resultSet.getString("fonte"));
+//             statement = conexao.createStatement();
+//             resultSet = statement.executeQuery(query);
 
-                pesquisas.add(pesquisa);
-            }
-        } catch (SQLException e ) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (statement != null) {
-                    statement.close();
-                }
+//             while (resultSet.next()) {
+//                 Pesquisa pesquisa = new Pesquisa();
+//                 pesquisa.setIdPesquisa(resultSet.getInt("idPesquisa"));
+//                 pesquisa.setPorcentagem(resultSet.getFloat("porcentagem"));
+//                 pesquisa.setUf(resultSet.getString("UF"));
+//                 pesquisa.setData(resultSet.getDate("data"));
+//                 pesquisa.setFonte(resultSet.getString("fonte"));
 
-                if (resultSet != null) {
-                    resultSet.close();
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
+//                 pesquisas.add(pesquisa);
+//             }
+//         } catch (SQLException e ) {
+//             e.printStackTrace();
+//         } finally {
+//             try {
+//                 if (statement != null) {
+//                     statement.close();
+//                 }
 
-        return pesquisas;
-    }
+//                 if (resultSet != null) {
+//                     resultSet.close();
+//                 }
+//             } catch (SQLException e) {
+//                 e.printStackTrace();
+//             }
+//         }
 
-}
+//         return pesquisas;
+//     }
+
+// }

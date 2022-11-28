@@ -4,13 +4,13 @@ import java.sql.SQLException;
 
 public class BddConection {
 
-    private static final  String URL = "jdbc:mysql://localhost:3306/pi";
+    private static final  String URL = "jdbc:mysql://localhost:3306/PiV2";
     private static final String USER = "root";
-    private static final String SENHA = "root";
-//    private static final String SENHA = "1234";
+    //private static final String SENHA = "root";
+    //private static final String SENHA = "1234";
 
     //private static final String SENHA = "root";
-    //private static final String SENHA = "KEIF4632"; //1234 no git
+    private static final String SENHA = "KEIF4632";
 
 
     private static Connection conexao;
