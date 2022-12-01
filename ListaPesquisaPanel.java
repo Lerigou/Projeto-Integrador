@@ -35,7 +35,7 @@ public class ListaPesquisaPanel extends JPanel {
         panel.setBackground(janela.corSecundariaPink);
 //        FlowLayout layout = (FlowLayout) panel.getLayout();
 //        layout.setAlignment(FlowLayout.RIGHT);
-        panel.setPreferredSize(new Dimension(150, 100));
+        panel.setPreferredSize(new Dimension(200, 100));
         panel.setLayout(new FlowLayout(FlowLayout.CENTER));
 
         gerarBtnAdicionar();
@@ -60,11 +60,13 @@ public class ListaPesquisaPanel extends JPanel {
 
         btnAdd.setBackground(janela.corPrincipal);
         btnAdd.setForeground(janela.corSecundariaBlue);
+        btnAdd.setFont(new Font("Arial", Font.BOLD, 18));
+
 
         Border line = new LineBorder(janela.corSecundariaBlue);
         btnAdd.setBorder(line);
 
-        btnAdd.setPreferredSize(new Dimension(100, 30));
+        btnAdd.setPreferredSize(new Dimension(150, 40));
 
         btnAdd.addMouseListener(new java.awt.event.MouseAdapter(){
             public void mouseEntered(java.awt.event.MouseEvent e){
@@ -90,11 +92,13 @@ public class ListaPesquisaPanel extends JPanel {
         btnEditar.setBackground(janela.corPrincipal);
         btnEditar.setForeground(janela.corSecundariaBlue);
         btnEditar.setPreferredSize(new Dimension(100, 30));
+        btnEditar.setFont(new Font("Arial", Font.BOLD, 18));
+
 
         Border line = new LineBorder(janela.corSecundariaBlue);
         btnEditar.setBorder(line);
 
-        btnEditar.setPreferredSize(new Dimension(100, 30));
+        btnEditar.setPreferredSize(new Dimension(150, 40));
 
 
         btnEditar.addActionListener(new ActionListener() {
@@ -110,11 +114,13 @@ public class ListaPesquisaPanel extends JPanel {
         btnExcluir.setBackground(janela.corPrincipal);
         btnExcluir.setForeground(janela.corSecundariaBlue);
         btnExcluir.setPreferredSize(new Dimension(100, 30));
+        btnExcluir.setFont(new Font("Arial", Font.BOLD, 18));
+
 
         Border line = new LineBorder(janela.corSecundariaBlue);
         btnExcluir.setBorder(line);
 
-        btnExcluir.setPreferredSize(new Dimension(100, 30));
+        btnExcluir.setPreferredSize(new Dimension(150, 40));
 
 
         btnExcluir.addActionListener(new ActionListener() {
@@ -134,11 +140,12 @@ public class ListaPesquisaPanel extends JPanel {
         btnVoltar = new JButton("Voltar");
         btnVoltar.setBackground(janela.corPrincipal);
         btnVoltar.setForeground(janela.corSecundariaBlue);
+        btnVoltar.setFont(new Font("Arial", Font.BOLD, 15));
 
         Border line = new LineBorder(janela.corSecundariaBlue);
         btnVoltar.setBorder(line);
 
-        btnVoltar.setPreferredSize(new Dimension(100, 30));
+        btnVoltar.setPreferredSize(new Dimension(130, 35));
 
         btnVoltar.addMouseListener(new java.awt.event.MouseAdapter(){
             public void mouseEntered(java.awt.event.MouseEvent e){
@@ -172,7 +179,8 @@ public class ListaPesquisaPanel extends JPanel {
 //      Esse viewPort deixa eu pintar todo o fundo da tabela, e n só as linhas
         tabela.setFillsViewportHeight(true);
 //      O Texto da tabela é o foreground
-        tabela.setForeground(janela.corContrasteBlue);
+        tabela.setForeground(janela.corSecundariaBlue);
+        tabela.setFont(new Font("Arial", Font.ITALIC, 15));
         tabela.setShowGrid(true);
         tabela.setRowHeight(20);
         tabela.setBackground(janela.corSecundariaPink);

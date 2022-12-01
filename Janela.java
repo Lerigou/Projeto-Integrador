@@ -13,13 +13,14 @@ public class Janela extends JFrame {
     private CandidatoFormPanel candidatoFormPanel;
     private PesquisaFormPanel pesquisaFormPanel;
     private ListaPesquisaPanel listaPesquisaPanel;
+    private ListaDesempenhoPanel listaDesempenhoPanel;
 
     public Color corPrincipal = new Color(255, 246, 235);
     public Color corSecundariaPink = new Color(234, 207, 200);
-    public Color  corContrasteBlue = new Color(23,58,103);
-    public Color corSecundariaBlue = new Color(72,102,151);
-    public Color corSecundariaBlueLight = new Color(117, 148, 194, 255);
-
+    public Color  corContrasteBlue = new Color(151,138,155);
+    public Color corSecundariaBlue = new Color(47,21,55);
+    public Color corSecundariaBlueLight = new Color(255, 165, 90);
+//    public Font fontLaura = new Font(Font.createFonts());
 
 
     public Janela(){
@@ -35,7 +36,7 @@ public class Janela extends JFrame {
 
     public void mostrar() {
         pack();
-        setSize(720, 370);
+        setSize(780, 680);
         setResizable(false);
         setLocationRelativeTo(null);
         setVisible(true);
@@ -66,6 +67,11 @@ public class Janela extends JFrame {
         cardLayout.show(cardPanel, PesquisaFormPanel.class.getName());
     }
 
+    public void mostrarListaDesempenhoPanel(){
+        listaPesquisaPanel.recarregar();
+        cardLayout.show(cardPanel, ListaDesempenhoPanel.class.getName());
+    }
+
     private void criarCards(){
         principal = new Principal(this);
         cardPanel.add(principal, Principal.class.getName());
@@ -76,11 +82,15 @@ public class Janela extends JFrame {
         listaPesquisaPanel = new ListaPesquisaPanel(this);
         cardPanel.add(listaPesquisaPanel, ListaPesquisaPanel.class.getName());
 
+        listaDesempenhoPanel = new ListaDesempenhoPanel(this);
+        cardPanel.add(listaDesempenhoPanel, ListaDesempenhoPanel.class.getName());
+
         pesquisaFormPanel = new PesquisaFormPanel(this);
         cardPanel.add(pesquisaFormPanel, PesquisaFormPanel.class.getName());
 
         candidatoFormPanel = new CandidatoFormPanel(this);
         cardPanel.add(candidatoFormPanel, CandidatoFormPanel.class.getName());
+
 
     }
 

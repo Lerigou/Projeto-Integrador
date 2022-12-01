@@ -62,7 +62,7 @@ public class CandidatoFormPanel extends JPanel {
 
         label = new JLabel("ID");
         label.setFont(new Font("Arial", Font.BOLD, 15));
-        label.setForeground(janela.corContrasteBlue);
+        label.setForeground(janela.corSecundariaBlue);
         adicionarComponente(label, 0, 0);
         txtId = new JTextField(5);
         txtId.setEditable(false);
@@ -72,41 +72,41 @@ public class CandidatoFormPanel extends JPanel {
 
         label = new JLabel("Nome Candidato");
         label.setFont(new Font("Arial", Font.BOLD, 15));
-        label.setForeground(janela.corContrasteBlue);
+        label.setForeground(janela.corSecundariaBlue);
         adicionarComponente(label, 1, 0);
         txtNomeCandidato = new JTextField(15);
         txtNomeCandidato.setBackground(janela.corSecundariaPink);
-        txtNomeCandidato.setForeground(janela.corContrasteBlue);
+        txtNomeCandidato.setForeground(janela.corSecundariaBlue);
         txtNomeCandidato.setFont(new Font("Arial", Font.BOLD, 15));
         adicionarComponente(txtNomeCandidato, 1, 2);
 
         label = new JLabel("Nome Vice");
         label.setFont(new Font("Arial", Font.BOLD, 15));
-        label.setForeground(janela.corContrasteBlue);
+        label.setForeground(janela.corSecundariaBlue);
         adicionarComponente(label, 2, 0);
         txtNomeVice = new JTextField(15);
         txtNomeVice.setBackground(janela.corSecundariaPink);
-        txtNomeVice.setForeground(janela.corContrasteBlue);
+        txtNomeVice.setForeground(janela.corSecundariaBlue);
         txtNomeVice.setFont(new Font("Arial", Font.BOLD, 15));
         adicionarComponente(txtNomeVice, 2, 2);
 
         label = new JLabel("Sigla do Partido");
         label.setFont(new Font("Arial", Font.BOLD, 15));
-        label.setForeground(janela.corContrasteBlue);
+        label.setForeground(janela.corSecundariaBlue);
         adicionarComponente(label, 3, 0);
         txtSiglaPartido = new JTextField(15);
         txtSiglaPartido.setBackground(janela.corSecundariaPink);
-        txtSiglaPartido.setForeground(janela.corContrasteBlue);
+        txtSiglaPartido.setForeground(janela.corSecundariaBlue);
         txtSiglaPartido.setFont(new Font("Arial", Font.BOLD, 15));
         adicionarComponente(txtSiglaPartido, 3, 2);
 
         label = new JLabel("Número do Partido");
         label.setFont(new Font("Arial", Font.BOLD, 15));
-        label.setForeground(janela.corContrasteBlue);
+        label.setForeground(janela.corSecundariaBlue);
         adicionarComponente(label, 4, 0);
         numPartido = new JTextField(15);
         numPartido.setBackground(janela.corSecundariaPink);
-        numPartido.setForeground(janela.corContrasteBlue);
+        numPartido.setForeground(janela.corSecundariaBlue);
         numPartido.setFont(new Font("Arial", Font.BOLD, 15));
         adicionarComponente(numPartido, 4, 2);
 

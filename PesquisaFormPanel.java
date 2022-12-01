@@ -6,6 +6,9 @@ import java.awt.event.*;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JSeparator;
+
+import static java.io.File.separator;
 
 public class PesquisaFormPanel extends JPanel {
 
@@ -68,81 +71,83 @@ public class PesquisaFormPanel extends JPanel {
         JLabel label;
 
         label = new JLabel("ID");
-        label.setFont(new Font("Arial", Font.BOLD, 15));
-        label.setForeground(janela.corContrasteBlue);
-        adicionarComponente(label, 0, 0);
+        label.setFont(new Font("Arial", Font.BOLD, 20));
+        label.setForeground(janela.corSecundariaBlue);
+        adicionarComponente(label, 0, 0, 1, 1);
         txtId = new JTextField(5);
         txtId.setEditable(false);
         txtId.setBackground(janela.corSecundariaBlueLight);
-        txtId.setFont(new Font("Arial", Font.BOLD, 15));
-        adicionarComponente(txtId,0,2);
+        txtId.setFont(new Font("Arial", Font.ITALIC, 20));
+        adicionarComponente(txtId,0,2, 1, 1);
 
         label = new JLabel("Porcentagem");
-        label.setFont(new Font("Arial", Font.BOLD, 15));
-        label.setForeground(janela.corContrasteBlue);
-        adicionarComponente(label, 1, 0);
+        label.setFont(new Font("Arial", Font.BOLD, 20));
+        label.setForeground(janela.corSecundariaBlue);
+        adicionarComponente(label, 1, 0,1 ,1);
         txtPorcentagem = new JTextField(5);
         txtPorcentagem.setEditable(true);
         txtPorcentagem.setBackground(janela.corSecundariaPink);
-        txtPorcentagem.setForeground(janela.corContrasteBlue);
-        txtPorcentagem.setFont(new Font("Arial", Font.BOLD, 15));
-        adicionarComponente(txtPorcentagem,1,2);
+        txtPorcentagem.setForeground(janela.corSecundariaBlue);
+        txtPorcentagem.setFont(new Font("Arial", Font.ITALIC, 20));
+        adicionarComponente(txtPorcentagem,1,2, 1, 1);
 
         label = new JLabel("Unidade da Federacao");
-        label.setFont(new Font("Arial", Font.BOLD, 15));
-        label.setForeground(janela.corContrasteBlue);
-        adicionarComponente(label, 2, 0);
+        label.setFont(new Font("Arial", Font.BOLD, 20));
+        label.setForeground(janela.corSecundariaBlue);
+        adicionarComponente(label, 2, 0, 1, 1);
         txtUF = new JTextField(15);
         txtUF.setBackground(janela.corSecundariaPink);
-        txtUF.setForeground(janela.corContrasteBlue);
-        txtUF.setFont(new Font("Arial", Font.BOLD, 15));
-        adicionarComponente(txtUF, 2, 2);
+        txtUF.setForeground(janela.corSecundariaBlue);
+        txtUF.setFont(new Font("Arial", Font.ITALIC, 20));
+        adicionarComponente(txtUF, 2, 2, 1, 1);
 
         label = new JLabel("Data");
-        label.setFont(new Font("Arial", Font.BOLD, 15));
-        label.setForeground(janela.corContrasteBlue);
-        adicionarComponente(label, 3, 0);
+        label.setFont(new Font("Arial", Font.BOLD, 20));
+        label.setForeground(janela.corSecundariaBlue);
+        adicionarComponente(label, 3, 0,1 ,1);
         txtData = new JTextField(15);
         txtData.setBackground(janela.corSecundariaPink);
-        txtData.setForeground(janela.corContrasteBlue);
-        txtData.setFont(new Font("Arial", Font.BOLD, 15));
+        txtData.setForeground(janela.corSecundariaBlue);
+        txtData.setFont(new Font("Arial", Font.ITALIC, 20));
 
         txtData.addMouseListener(new java.awt.event.MouseAdapter(){
             public void mouseEntered(java.awt.event.MouseEvent e){
                 if (txtData.getText().equals("")){
                     txtData.setText("XXXX-XX-XX");
-                    txtData.setForeground(janela.corContrasteBlue);
+                    txtData.setForeground(janela.corSecundariaBlue);
                 }
             }
             public void mouseExited(java.awt.event.MouseEvent e){
                 if (txtData.getText().equals("XXXX-XX-XX")){
                     txtData.setText("");
-                    txtData.setForeground(janela.corContrasteBlue);
+                    txtData.setForeground(janela.corSecundariaBlue);
                 }
             }
         });
 
-        adicionarComponente(txtData, 3, 2);
+        adicionarComponente(txtData, 3, 2, 1, 1);
 
         label = new JLabel("Fonte");
-        label.setFont(new Font("Arial", Font.BOLD, 15));
-        label.setForeground(janela.corContrasteBlue);
-        adicionarComponente(label, 4, 0);
+        label.setFont(new Font("Arial", Font.BOLD, 20));
+        label.setForeground(janela.corSecundariaBlue);
+        adicionarComponente(label, 4, 0, 1, 1);
         txtFonte = new JTextField(15);
         txtFonte.setBackground(janela.corSecundariaPink);
-        txtFonte.setForeground(janela.corContrasteBlue);
-        txtFonte.setFont(new Font("Arial", Font.BOLD, 15));
-        adicionarComponente(txtFonte, 4, 2);
+        txtFonte.setForeground(janela.corSecundariaBlue);
+        txtFonte.setFont(new Font("Arial", Font.ITALIC, 20));
+        adicionarComponente(txtFonte, 4, 2, 1, 1);
 
         label = new JLabel("ID Candidato");
-        label.setFont(new Font("Arial", Font.BOLD, 15));
-        label.setForeground(janela.corContrasteBlue);
-        adicionarComponente(label, 5, 0);
+        label.setFont(new Font("Arial", Font.BOLD, 20));
+        label.setForeground(janela.corSecundariaBlue);
+        adicionarComponente(label, 5, 0, 1, 1);
         txtCandidato = new JTextField(15);
         txtCandidato.setBackground(janela.corSecundariaPink);
-        txtCandidato.setForeground(janela.corContrasteBlue);
-        txtCandidato.setFont(new Font("Arial", Font.BOLD, 15));
-        adicionarComponente(txtCandidato, 5, 2);
+        txtCandidato.setForeground(janela.corSecundariaBlue);
+        txtCandidato.setFont(new Font("Arial", Font.ITALIC, 20));
+        adicionarComponente(txtCandidato, 5, 2, 1, 1);
+
+//        Arrumar a largura do JSeparator
 
         /*label = new JLabel("Candidato");
         label.setFont(new Font("Arial", Font.BOLD, 15));
@@ -187,7 +192,7 @@ public class PesquisaFormPanel extends JPanel {
         gerarBtnSalvar(btnPanel);
         gerarBtnCancelar(btnPanel);
 
-        adicionarComponente(btnPanel, 7, 0, 4, 1);
+        adicionarComponente(btnPanel, 10, 0, 4, 1);
     }
 
     private void gerarBtnSalvar(JPanel btnPanel){
@@ -195,12 +200,12 @@ public class PesquisaFormPanel extends JPanel {
 
         btnSalvar.setBackground(janela.corPrincipal);
         btnSalvar.setForeground(janela.corSecundariaBlue);
-        btnSalvar.setFont(new Font("Arial", Font.BOLD, 15));
+        btnSalvar.setFont(new Font("Arial", Font.BOLD, 18));
 
         Border line = new LineBorder(janela.corSecundariaBlue);
         btnSalvar.setBorder(line);
 
-        btnSalvar.setPreferredSize(new Dimension(100, 30));
+        btnSalvar.setPreferredSize(new Dimension(150, 40));
 
         btnSalvar.addMouseListener(new java.awt.event.MouseAdapter(){
             public void mouseEntered(java.awt.event.MouseEvent e){
@@ -259,12 +264,12 @@ public class PesquisaFormPanel extends JPanel {
 
         btnCancelar.setBackground(janela.corPrincipal);
         btnCancelar.setForeground(janela.corSecundariaBlue);
-        btnCancelar.setFont(new Font("Arial", Font.BOLD, 15));
+        btnCancelar.setFont(new Font("Arial", Font.BOLD, 18));
 
         Border line = new LineBorder(janela.corSecundariaBlue);
         btnCancelar.setBorder(line);
 
-        btnCancelar.setPreferredSize(new Dimension(100, 30));
+        btnCancelar.setPreferredSize(new Dimension(150, 40));
 
         btnCancelar.addMouseListener(new java.awt.event.MouseAdapter(){
             public void mouseEntered(java.awt.event.MouseEvent e){
