@@ -58,6 +58,7 @@ public class PesquisaTableModel extends AbstractTableModel {
                 break;
             case 5:
                 value = String.valueOf(pesquisa.getNomeCandidato());
+                break;
             default:
                 System.err.printf("[ERRO] Indice de coluna invalido: %d%n", colId);
         }

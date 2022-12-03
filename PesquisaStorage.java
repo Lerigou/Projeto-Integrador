@@ -128,17 +128,99 @@ public class PesquisaStorage {
      */
     public static List<Pesquisa> listar(){
         List<Pesquisa> pesquisas = new ArrayList<>();
-
-        //String query = "SELECT p.*, cp.porcentagem, c.nomeCandidato FROM pesquisa p JOIN candidato_pesquisa cp ON p.idpesquisa = cp.pesquisa_idpesquisa JOIN candidato c on c.idcandidato = cp.candidato_idcandidato ORDER BY idpesquisa";
-//        String query = "SELECT * FROM pesquisa p JOIN candidato_pesquisa cp ON p.idpesquisa = cp.pesquisa_idpesquisa ORDER BY idpesquisa;";
         String query = "SELECT p.idPesquisa, p.porcentagem, p.UF, p.data, p.fonte, c.nomeCandidato FROM pesquisa p JOIN candidato c ON p.Candidato_idCandidato = c.idCandidato ORDER BY p.data DESC";
 
+        Connection conexao = null;
+        Statement statement = null;
+        ResultSet resultSet = null;
 
+        try {
+            conexao = BddConection.getConexao();
 
-        //String query = "SELECT * FROM pesquisa ORDER BY data";
-        // A utilização desse JOIN ta dando erro
-        //String query = "SELECT * FROM pesquisa p INNER JOIN candidato_pesquisa cp ON p.idpesquisa = cp.pesquisa_idpesquisa ORDER BY data";
-        //String query = "SELECT * FROM pesquisa p JOIN candidato_pesquisa cp ON p.idpesquisa = cp.pesquisa_idpesquisa ORDER BY data;";
+            statement = conexao.createStatement();
+            resultSet = statement.executeQuery(query);
+
+            while (resultSet.next()) {
+                Pesquisa pesquisa = new Pesquisa();
+
+                pesquisa.setIdPesquisa(resultSet.getInt("idPesquisa"));
+                pesquisa.setPorcentagem(resultSet.getFloat("Porcentagem"));
+
+                pesquisa.setUf(resultSet.getString("UF"));
+                pesquisa.setData(resultSet.getDate("Data"));
+                pesquisa.setFonte(resultSet.getString("Fonte"));
+                pesquisa.setNomeCandidato(resultSet.getString("nomeCandidato"));
+
+                pesquisas.add(pesquisa);
+            }
+        } catch (SQLException e ) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (statement != null) {
+                    statement.close();
+                }
+
+                if (resultSet != null) {
+                    resultSet.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return pesquisas;
+    }
+
+    public static List<Pesquisa> listarDesempenho(){
+        List<Pesquisa> pesquisas = new ArrayList<>();
+        String query = "SELECT p.idPesquisa, p.porcentagem, p.UF, p.data, p.fonte, c.nomeCandidato FROM pesquisa p JOIN candidato c ON p.Candidato_idCandidato = c.idCandidato ORDER BY p.data DESC";
+
+        Connection conexao = null;
+        Statement statement = null;
+        ResultSet resultSet = null;
+
+        try {
+            conexao = BddConection.getConexao();
+
+            statement = conexao.createStatement();
+            resultSet = statement.executeQuery(query);
+
+            while (resultSet.next()) {
+                Pesquisa pesquisa = new Pesquisa();
+
+                pesquisa.setIdPesquisa(resultSet.getInt("idPesquisa"));
+                pesquisa.setPorcentagem(resultSet.getFloat("Porcentagem"));
+
+                pesquisa.setUf(resultSet.getString("UF"));
+                pesquisa.setData(resultSet.getDate("Data"));
+                pesquisa.setFonte(resultSet.getString("Fonte"));
+                pesquisa.setNomeCandidato(resultSet.getString("nomeCandidato"));
+
+                pesquisas.add(pesquisa);
+            }
+        } catch (SQLException e ) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (statement != null) {
+                    statement.close();
+                }
+
+                if (resultSet != null) {
+                    resultSet.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return pesquisas;
+    }
+
+    public static List<Pesquisa> listarDesempenho(String nome){
+        List<Pesquisa> pesquisas = new ArrayList<>();
+        String query = "SELECT p.idPesquisa, p.porcentagem, p.UF, p.data, p.fonte, c.nomeCandidato FROM pesquisa p JOIN candidato c ON p.Candidato_idCandidato = c.idCandidato WHERE c.nomeCandidato like '" + nome + "%' ORDER BY p.data DESC";
 
         Connection conexao = null;
         Statement statement = null;
