@@ -147,26 +147,6 @@ public class PesquisaFormPanel extends JPanel {
         txtCandidato.setFont(new Font("Arial", Font.ITALIC, 20));
         adicionarComponente(txtCandidato, 5, 2, 1, 1);
 
-//        Arrumar a largura do JSeparator
-
-        /*label = new JLabel("Candidato");
-        label.setFont(new Font("Arial", Font.BOLD, 15));
-        label.setForeground(janela.corContrasteBlue);
-        adicionarComponente(label, 6, 0);
-        JComboBox<String> candidatoJComboBox = new JComboBox<String>();
-        candidatoJComboBox.setBackground(janela.corSecundariaPink);
-        candidatoJComboBox.setForeground(janela.corContrasteBlue);
-        candidatoJComboBox.setFont(new Font("Arial", Font.BOLD, 15));
-        candidatoJComboBox.addItem("Selecione um candidato");
-        candidatoJComboBox.setSelectedIndex(0);
-        popularComboBox();
-
-        for (int i = 0; i < candidatos.size(); i++) {
-            candidatoJComboBox.addItem(candidatos.get(i).getNomeCandidato());
-        }
-
-        adicionarComponente(candidatoJComboBox, 6, 2);*/
-
         Border line = new LineBorder(janela.corPrincipal);
         txtPorcentagem.setBorder(line);
         txtUF.setBorder(line);

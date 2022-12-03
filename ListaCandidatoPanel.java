@@ -33,8 +33,6 @@ public class ListaCandidatoPanel extends JPanel {
     private void criarBtnComandos(){
         JPanel panel = new JPanel();
         panel.setBackground(janela.corSecundariaPink);
-//        FlowLayout layout = (FlowLayout) panel.getLayout();
-//        layout.setAlignment(FlowLayout.RIGHT);
         panel.setPreferredSize(new Dimension(200, 100));
         panel.setLayout(new FlowLayout(FlowLayout.CENTER));
 
@@ -123,14 +121,27 @@ public class ListaCandidatoPanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Candidato candidato = tableModel.getCandidato(tabela.getSelectedRow());
+
                 int resposta = JOptionPane.showConfirmDialog(ListaCandidatoPanel.this, "O candidato será apagado. Tem certeza?", "Excluir candidato", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
-                if (resposta == JOptionPane.YES_OPTION){
-                    CandidatoStorage.remover(candidato);
-                    recarregar();
+                if (resposta == JOptionPane.YES_OPTION) {
+                    if (!CandidatoStorage.remover(candidato)) {
+                        JOptionPane.showMessageDialog(ListaCandidatoPanel.this,
+                                "Este candidato não pode ser excluído pois existem pesquisas cadastradas para ele! " + "\n" +
+                                        "Exclua as pesquisas e volte aqui depois.",
+                                "Aviso",
+                                JOptionPane.INFORMATION_MESSAGE);
+                    } else {
+                        JOptionPane.showMessageDialog(ListaCandidatoPanel.this,
+                                "Candidato excluído com sucesso!",
+                                "Aviso",
+                                JOptionPane.INFORMATION_MESSAGE);
+                        recarregar();
+                    }
                 }
             }
         });
     }
+
 
     private void gerarBtnVoltar(){
         btnVoltar = new JButton("Voltar");

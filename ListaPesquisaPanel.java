@@ -130,6 +130,10 @@ public class ListaPesquisaPanel extends JPanel {
                 int resposta = JOptionPane.showConfirmDialog(ListaPesquisaPanel.this, "A pesquisa será apagada. Tem certeza?", "Excluir pesquisa", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
                 if (resposta == JOptionPane.YES_OPTION){
                     PesquisaStorage.remover(pesquisa);
+                    JOptionPane.showMessageDialog(ListaPesquisaPanel.this,
+                            "Pesquisa excluída com sucesso!",
+                            "Aviso",
+                            JOptionPane.INFORMATION_MESSAGE);
                     recarregar();
                 }
             }

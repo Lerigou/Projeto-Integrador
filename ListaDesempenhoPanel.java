@@ -5,7 +5,10 @@ import javax.swing.table.DefaultTableCellRenderer;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.util.List;
 
 public class ListaDesempenhoPanel extends JPanel{
 
@@ -13,11 +16,16 @@ public class ListaDesempenhoPanel extends JPanel{
     private JTable tabela;
     private JButton btnPesquisar;
     private JButton btnVoltar;
+    private JTextField txtPesquisa;
 
     private CandidatoTableModel candidatoTableModel;
     private PesquisaTableModel pesquisaTableModel;
-//    private List<Candidato> candidatos = new ArrayList<Candidato>();
+
+    List<Candidato> candidatos = new ArrayList<>();
     private CandidatoStorage candidatoStorage;
+    JComboBox<String> candidatoJComboBox = new JComboBox<String>();
+
+//    private String candidatoSelecionado = candidatoJComboBox.getSelectedItem().toString();
 
     public ListaDesempenhoPanel(Janela janela){
         this.janela = janela;
@@ -33,37 +41,42 @@ public class ListaDesempenhoPanel extends JPanel{
         panel.setPreferredSize(new Dimension(200, 100));
         panel.setLayout(new FlowLayout(FlowLayout.CENTER));
 
-        gerarBtnPesquisar();
-        panel.add(btnPesquisar);
+        gerarTxtPesquisa();
+        panel.add(txtPesquisa);
 
         gerarBtnVoltar();
         panel.add(btnVoltar);
 
-        gerarComboBox();
-
         add(panel, BorderLayout.WEST);
     }
 
-    private void gerarBtnPesquisar(){
-        btnPesquisar = new JButton("Pesquisar");
-        btnPesquisar.setBackground(janela.corPrincipal);
-        btnPesquisar.setForeground(janela.corSecundariaBlue);
-        btnPesquisar.setFont(new Font("Arial", Font.BOLD, 18));
-
-        Border line = new LineBorder(janela.corSecundariaBlue);
-        btnPesquisar.setBorder(line);
-
-        btnPesquisar.setPreferredSize(new Dimension(150, 40));
-
-        btnPesquisar.addMouseListener(new java.awt.event.MouseAdapter(){
-            public void mouseEntered(java.awt.event.MouseEvent e){
-                btnPesquisar.setForeground(janela.corSecundariaPink);
-                btnPesquisar.setBackground(janela.corSecundariaBlue);
+    private void gerarTxtPesquisa() {
+        txtPesquisa = new JTextField();
+        txtPesquisa.setPreferredSize(new Dimension(150, 40));
+        txtPesquisa.setBackground(janela.corSecundariaPink);
+        txtPesquisa.setForeground(janela.corSecundariaBlue);
+        txtPesquisa.setFont(new Font("Arial", Font.ITALIC, 20));
+        txtPesquisa.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyReleased(KeyEvent e) {
+                if (txtPesquisa.getText() != null) {
+                    pesquisaTableModel.carregar(PesquisaStorage.listarDesempenho(txtPesquisa.getText()));
+                }
             }
+        });
 
+        txtPesquisa.addMouseListener(new java.awt.event.MouseAdapter(){
+            public void mouseEntered(java.awt.event.MouseEvent e){
+                if (txtPesquisa.getText().equals("")){
+                    txtPesquisa.setText("Candidato");
+                    txtPesquisa.setForeground(janela.corSecundariaBlue);
+                }
+            }
             public void mouseExited(java.awt.event.MouseEvent e){
-                btnPesquisar.setForeground(janela.corSecundariaBlue);
-                btnPesquisar.setBackground(janela.corPrincipal);
+                if (txtPesquisa.getText().equals("Candidato")){
+                    txtPesquisa.setText("");
+                    txtPesquisa.setForeground(janela.corSecundariaBlue);
+                }
             }
         });
     }
@@ -99,28 +112,36 @@ public class ListaDesempenhoPanel extends JPanel{
 
     }
 
-    private void gerarComboBox(){
-        JComboBox<String> candidatoJComboBox = new JComboBox<String>();
-        candidatoJComboBox.setBackground(janela.corSecundariaPink);
-        candidatoJComboBox.setForeground(janela.corContrasteBlue);
-        candidatoJComboBox.setFont(new Font("Arial", Font.BOLD, 18));
-        candidatoJComboBox.setPreferredSize(new Dimension(150, 40));
-        candidatoJComboBox.addItem("Selecione um candidato");
-        candidatoJComboBox.setSelectedIndex(0);
+//    private void gerarComboBox(){
+//        candidatoJComboBox.setBackground(janela.corPrincipal);
+//        candidatoJComboBox.setForeground(janela.corSecundariaBlue);
+//        candidatoJComboBox.setFont(new Font("Arial", Font.BOLD, 20));
+//        candidatoJComboBox.setPreferredSize(new Dimension(150, 40));
+//        candidatoJComboBox.addItem("Selecione um candidato");
+//        candidatoJComboBox.setSelectedIndex(0);
 //        popularComboBox();
 //
 //        for (int i = 0; i < candidatos.size(); i++) {
 //            candidatoJComboBox.addItem(candidatos.get(i).getNomeCandidato());
 //        }
-
-        Border line = new LineBorder(janela.corPrincipal);
-        candidatoJComboBox.setBorder(line);
-    }
-
-//    private void popularComboBox(){
-//        candidatoStorage = new CandidatoStorage();
-//        this.candidatos = candidatoStorage.listarNome();
+//
+//        Border line = new LineBorder(janela.corPrincipal);
+//        candidatoJComboBox.setBorder(line);
+//
+//        candidatoJComboBox.addKeyListener(new KeyAdapter() {
+//            @Override
+//            public void keyReleased(KeyEvent e) {
+//                if (candidatoJComboBox.getSelectedItem() != null) {
+//                    pesquisaTableModel.carregar(PesquisaStorage.listarDesempenho(candidatoJComboBox.getName()));
+//                }
+//            }
+//        });
 //    }
+
+    private void popularComboBox(){
+        candidatoStorage = new CandidatoStorage();
+        this.candidatos = candidatoStorage.listarNome();
+    }
 
     private void gerarCandidatoTabelaPanel() {
         JPanel panel = new JPanel();
@@ -157,7 +178,6 @@ public class ListaDesempenhoPanel extends JPanel{
 
     }
 
-
     private void gerarPesquisaTabelaPanel() {
         JPanel panel = new JPanel();
         panel.setBackground(janela.corPrincipal);
@@ -191,6 +211,13 @@ public class ListaDesempenhoPanel extends JPanel{
 
         add(panel, BorderLayout.CENTER);
 
+    }
+
+    // PQ Q ISSO NÃO FUNCIONA????????????????????
+    // ele era pra ser chamado, mas ele nunca é chamado...............
+    public void recarregar() {
+        pesquisaTableModel.carregar(PesquisaStorage.listar());
+        candidatoTableModel.carregar(CandidatoStorage.listar());
     }
 
 }

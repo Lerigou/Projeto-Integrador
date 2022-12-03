@@ -68,7 +68,7 @@ public class Janela extends JFrame {
     }
 
     public void mostrarListaDesempenhoPanel(){
-        listaPesquisaPanel.recarregar();
+        listaDesempenhoPanel.recarregar();
         cardLayout.show(cardPanel, ListaDesempenhoPanel.class.getName());
     }
 
@@ -90,8 +90,6 @@ public class Janela extends JFrame {
 
         candidatoFormPanel = new CandidatoFormPanel(this);
         cardPanel.add(candidatoFormPanel, CandidatoFormPanel.class.getName());
-
-
     }
 
 }
