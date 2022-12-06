@@ -138,10 +138,10 @@ public class ListaDesempenhoPanel extends JPanel{
 //        });
 //    }
 
-    private void popularComboBox(){
-        candidatoStorage = new CandidatoStorage();
-        this.candidatos = candidatoStorage.listarNome();
-    }
+//    private void popularComboBox(){
+//        candidatoStorage = new CandidatoStorage();
+//        this.candidatos = candidatoStorage.listarNome();
+//    }
 
     private void gerarCandidatoTabelaPanel() {
         JPanel panel = new JPanel();
@@ -213,8 +213,6 @@ public class ListaDesempenhoPanel extends JPanel{
 
     }
 
-    // PQ Q ISSO NÃO FUNCIONA????????????????????
-    // ele era pra ser chamado, mas ele nunca é chamado...............
     public void recarregar() {
         pesquisaTableModel.carregar(PesquisaStorage.listar());
         candidatoTableModel.carregar(CandidatoStorage.listar());
